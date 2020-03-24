@@ -1,0 +1,24 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>categorie</th>
+    <th>carburant</th>
+    <th>transmition</th>
+    <th>matricule</th>
+    <th>dateMiseEnCirculation</th>
+    <th>moyenNote</th>
+    <th>agence</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let c of voitureResult">
+    <td>{{c.categorie.libelle}}</td>
+    <td>{{c.carburant.libelle}}</td>
+    <td>{{c.transmition.libelle}}</td>
+    <td>{{c.matricule}}</td>
+    <td>{{c.dateMiseEnCirculation}}</td>
+    <td>{{c.moyenNote}}</td>
+    <td>{{c.agence.nom}}</td>
+  </tr>
+  </tbody>
+</table>

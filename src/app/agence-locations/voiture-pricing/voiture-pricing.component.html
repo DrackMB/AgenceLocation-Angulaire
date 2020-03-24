@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-body">
+    <label>porcentage</label><input type="number" [(ngModel)]="porcentage">
+    <label>DateFin</label><input type="date"  [(ngModel)]="dateFin">
+    <label>DateDebut</label><input type="date" [(ngModel)]="dateDebut">
+    <label>Voiture</label> <select [(ngModel)]="voiture">
+    <option  *ngFor="let c of voitureResult"  [value]="c">{{c.categorie.libelle}}</option>
+  </select>
+    <button class="btn-dark" (click)="save()">Accepte</button>
+  </div>
+</div>
+
