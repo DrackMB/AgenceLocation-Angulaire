@@ -9,13 +9,29 @@ import {Transmition} from '../Controller/model/transmition.model';
   styleUrls: ['./carburant.component.css']
 })
 export class CarburantComponent implements OnInit {
-
+   test = false;
   constructor(private carburantService: CarburantService) { }
   get carburants(): Array<Carburant> {
     return this.carburantService.carburants;
   }
+  get carburant(): Carburant {
+    return this.carburantService.carburant;
+  }
+  get carburantfoanded(): Carburant {
+    return this.carburantService.carburantfoanded;
+  }
+
   ngOnInit(): void {
     this.carburantService.findAll();
   }
+  save() {
+    this.carburantService.save(this.carburant);
+  }
 
+  findByLibelle(carburant: Carburant) {
+    return this.carburantService.findByLibelle(carburant);
+  }
+  deleteByLibelle(carburant: Carburant) {
+    return this.carburantService.deleteByLibelle(carburant);
+  }
 }

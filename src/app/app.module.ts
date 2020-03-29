@@ -9,6 +9,7 @@ import {TransmitionComponent} from './agence-locations/transmition/transmition.c
 import {HttpClientModule} from '@angular/common/http';
 import {VoitureComponent} from './agence-locations/voiture/voiture.component';
 import {FormsModule} from '@angular/forms';
+import { PromoComponent } from './agence-locations/promo/promo.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {FormsModule} from '@angular/forms';
     VoiturePricingComponent,
     CarburantComponent,
     TransmitionComponent,
-    VoitureComponent
+    VoitureComponent,
+    PromoComponent
   ],
     imports: [
         BrowserModule,

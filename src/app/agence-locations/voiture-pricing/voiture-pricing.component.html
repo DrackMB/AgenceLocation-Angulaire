@@ -1,12 +1,33 @@
+
 <div class="card">
+  <div class="card-header">Ajouter VoiturePricing</div>
   <div class="card-body">
-    <label>porcentage</label><input type="number" [(ngModel)]="porcentage">
-    <label>DateFin</label><input type="date"  [(ngModel)]="dateFin">
-    <label>DateDebut</label><input type="date" [(ngModel)]="dateDebut">
-    <label>Voiture</label> <select [(ngModel)]="voiture">
-    <option  *ngFor="let c of voitureResult"  [value]="c">{{c.categorie.libelle}}</option>
-  </select>
-    <button class="btn-dark" (click)="save()">Accepte</button>
-  </div>
-</div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>porcentage</label>
+        <input type="number" [(ngModel)]="this.porcentage" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>DateDebut</label>
+        <input type="date" datetime="yyyy-MM-dd"  [(ngModel)]="voiturePricing.dateDebut" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>DateFin</label>
+        <input type="date" datetime="yyyy-MM-dd"  [(ngModel)]="this.voiturePricing.datefin" class="form-control">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 ">
+        <label>Categorie</label> <select [(ngModel)]="voiturePricing.categorie" class="form-control">
+        <option  *ngFor="let c of voitureResult"  [ngValue]="c.categorie">{{c.categorie.libelle}}</option>
+      </select>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class=" btn btn-block  btn-outline-dark" (click)="save(voiturePricing)">Ajouter</button>
 

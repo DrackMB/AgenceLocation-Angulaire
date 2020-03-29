@@ -13,8 +13,17 @@ export class TransmitionComponent implements OnInit {
   get transmitions(): Array<Transmition> {
     return this.transmitionService.transmitions;
   }
+  get transmition(): Transmition{
+    return this.transmitionService.transmition;
+  }
 
   ngOnInit(): void {
     this.transmitionService.findAll();
+  }
+  save() {
+    this.transmitionService.save(this.transmition);
+  }
+  findByLibelle() {
+    this.transmitionService.findByLibelle();
   }
 }
