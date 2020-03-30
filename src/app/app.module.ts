@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
 import {AppComponent} from './app.component';
 import {AgenceLocationsComponent} from './agence-locations/agence-locations.component';
@@ -10,7 +11,15 @@ import {HttpClientModule} from '@angular/common/http';
 import {VoitureComponent} from './agence-locations/voiture/voiture.component';
 import {FormsModule} from '@angular/forms';
 import { PromoComponent } from './agence-locations/promo/promo.component';
+import {AgenceComponent} from './agence-locations/agence/agence.component';
+import {CategorieComponent} from './agence-locations/categorie/categorie.component';
+import {MarqueComponent} from './agence-locations/marque/marque.component';
 
+const appRoutes: Routes = [
+  {path: 'Carburant' , component: CarburantComponent},
+  {path: 'Transmition' , component: TransmitionComponent},
+  {path: 'VoiturePrincing' , component: VoiturePricingComponent}
+]
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,12 +28,16 @@ import { PromoComponent } from './agence-locations/promo/promo.component';
     CarburantComponent,
     TransmitionComponent,
     VoitureComponent,
-    PromoComponent
+    PromoComponent,
+    AgenceComponent,
+    CategorieComponent,
+    MarqueComponent
   ],
     imports: [
         BrowserModule,
         HttpClientModule,
-        FormsModule
+        FormsModule,
+        RouterModule.forRoot(appRoutes)
     ],
   providers: [],
   bootstrap: [AgenceLocationsComponent]

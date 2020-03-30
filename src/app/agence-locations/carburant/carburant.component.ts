@@ -34,4 +34,7 @@ export class CarburantComponent implements OnInit {
   deleteByLibelle(carburant: Carburant) {
     return this.carburantService.deleteByLibelle(carburant);
   }
+  public cloneCarburant(carburant: Carburant): Carburant {
+    return  this.carburantService.cloneCarburant(carburant);
+  }
 }
