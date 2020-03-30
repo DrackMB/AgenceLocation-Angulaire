@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="card-header">Ajouter un Marque</div>
+  <div class="card-body">
+
+    <div class="form-group">
+      <label>Libelle</label>
+      <input type="text" class="form-control" [(ngModel)]="marque.libelle">
+    </div>
+  </div>
+      <div class="card-footer">
+        <button class="btn btn-outline-dark btn-block" (click)="save()">Save</button>
+
+      </div>
+
+  <label >Marque</label> <select name="marque"  (click)="findall()">
+  <option  *ngFor="let c of marques ">{{c.libelle}}</option>
+</select>
+
+
+</div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>libelle</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let c of marques">
+    <td>{{c.libelle}}</td>
+    <td><button class="btn btn-danger btn-sm fa fa-plus " (click)="findByMarqueLibelle(c)"></button></td>
+  </tr>
+  </tbody>
+</table>

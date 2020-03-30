@@ -1,0 +1,59 @@
+<div class="card">
+  <div class="card-header">Ajouter une categorie</div>
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col-md-12">
+        <label>Libelle</label>
+        <input type="text" class="form-control" [(ngModel)]="categorie.libelle">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <label>Porte</label>
+        <input type="number" class="form-control" [(ngModel)]="categorie.porte">
+      </div>
+
+      <div class="col-md-6">
+        <label>Siege</label>
+        <input type="number" class="form-control" [(ngModel)]="categorie.siege">
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <label >Marque</label> <select name="marque" [(ngModel)]="categorie.marque" class="col-md-auto">
+      <option  *ngFor="let c of marques " [ngValue]="c" >{{c.libelle}}</option>
+    </select>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <button class=" btn btn-block  btn-outline-dark" (click)="save1()">Ajouter</button>
+
+  </div>
+
+  <label >liste des categories </label> <select name="categorie" class="col-md-auto"  (click)="findall()" >
+  <option  *ngFor="let f of categories">{{f.libelle}}</option>
+</select>
+
+  <table class="table table-striped">
+  <thead>
+  <tr>
+    <th>libelle</th>
+    <th>porte</th>
+    <th>siege</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let ci of marque.categorie">
+    <td>{{ci.libelle}}</td>
+    <td>{{ci.porte}}</td>
+    <td>{{ci.siege}}</td>
+  </tr>
+  </tbody>
+  </table>
+
+</div>
+
