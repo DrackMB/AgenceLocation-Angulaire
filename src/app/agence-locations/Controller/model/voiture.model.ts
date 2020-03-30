@@ -12,4 +12,5 @@ export class Voiture {
   public dateMiseEnCirculation: Date;
   public moyenNote: number;
   public agence: Agence;
+  public  prixinitial: number;
 }

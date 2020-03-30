@@ -8,6 +8,7 @@
     <th>dateMiseEnCirculation</th>
     <th>moyenNote</th>
     <th>agence</th>
+    <th>Action</th>
   </tr>
   </thead>
   <tbody>
@@ -19,6 +20,69 @@
     <td>{{c.dateMiseEnCirculation}}</td>
     <td>{{c.moyenNote}}</td>
     <td>{{c.agence.nom}}</td>
+    <td><button class="btn btn-sm fa fa-trash " (click)="deletByMatricule(c)"></button></td>
   </tr>
   </tbody>
 </table>
+
+<div class="card">
+  <div class="card-header">Ajouter une voiture</div>
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col-md-12">
+        <label>Date mise en circulation </label>
+        <input type="date" class="form-control" [(ngModel)]="voiture.dateMiseEnCirculation">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <label>Matricule</label>
+        <input type="text" class="form-control" [(ngModel)]="voiture.matricule">
+      </div>
+
+      <div class="col-md-6">
+        <label>Moyen note </label>
+        <input type="number" class="form-control" [(ngModel)]="voiture.moyenNote">
+      </div>
+
+      <div class="col-md-6">
+        <label>Prix initial </label>
+        <input type="number" class="form-control" [(ngModel)]="voiture.prixinitial">
+      </div>
+
+      <div class="col-md-6">
+        <label >Categorie</label> <select name="categorie" [(ngModel)]="voiture.categorie" class="col-md-auto">
+        <option  *ngFor="let c of categories " [ngValue]="c" >{{c.libelle}}</option>
+      </select>
+      </div>
+
+      <div class="col-md-6">
+        <label >Agence</label> <select name="agence" [(ngModel)]="voiture.agence" class="col-md-auto">
+        <option  *ngFor="let c of agences" [ngValue]="c" >{{c.nom}}</option>
+      </select>
+      </div>
+
+      <div class="col-md-6">
+        <label >Carburant</label> <select name="carburant" [(ngModel)]="voiture.carburant" class="col-md-auto">
+        <option  *ngFor="let c of carburants " [ngValue]="c" >{{c.libelle}}</option>
+      </select>
+      </div>
+      <div class="col-md-6">
+        <label >Transmition</label> <select name="transmition" [(ngModel)]="voiture.transmition" class="col-md-auto">
+        <option  *ngFor="let c of transmitions " [ngValue]="c" >{{c.libelle}}</option>
+      </select>
+      </div>
+
+    </div>
+    </div>
+    <div class="card-footer">
+      <button class=" btn btn-block  btn-outline-dark" (click)="save2()">Ajouter</button>
+    </div>
+    <label >liste des voitures </label> <select name="voiture" class="col-md-auto"  (click)="findall()" >
+    <option  *ngFor="let f of voitureResult">{{f.categorie.libelle}}</option>
+  </select>
+
+</div>
+
