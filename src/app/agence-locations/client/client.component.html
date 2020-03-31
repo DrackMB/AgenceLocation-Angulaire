@@ -1,1 +1,80 @@
-<p>client works!</p>
+<div class="card col-md-6 m-3">
+  <div class="card-header">Ajouter un client</div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <label>CIN</label>
+        <input type="text" [(ngModel)]="client.cin" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>Nom</label>
+        <input type="text" [(ngModel)]="client.nom" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>Prenom</label>
+        <input type="text" [(ngModel)]="client.prenom" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>Sexe</label>
+        <input type="text" [(ngModel)]="client.sexe" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>Adresse</label>
+        <input type="text" [(ngModel)]="client.adress" class="form-control">
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class=" btn btn-block  btn-outline-dark" (click)="save()">save</button>
+
+    </div>
+  </div>
+</div>
+
+  <div><p>listes des clients</p></div>
+  <table class="table table-striped col-md-6 m-3">
+    <thead>
+    <tr>
+      <th>cin</th>
+      <th>nom</th>
+      <th>prenom</th>
+      <th>sexe</th>
+      <th>adresse</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let c of clients">
+      <td>{{c.cin}}</td>
+      <td>{{c.nom}}</td>
+      <td>{{c.prenom}}</td>
+      <td>{{c.sexe}}</td>
+      <td>{{c.adress}}</td>
+      <td>
+        <button class=" btn btn-block  btn-outline-dark" (click)="deletecin(c.cin)">delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="card-header">trouver un client</div>
+  <div class="card-body">
+    <div class="form-group">
+      <label>Libelle</label>
+      <input type="text" class="form-control" [(ngModel)]="client.cin">
+    </div>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-outline-dark btn-block" (click)="findcin(client.cin)">trouver</button>
+
+  </div>
+
+
+
+

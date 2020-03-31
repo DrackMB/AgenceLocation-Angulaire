@@ -25,7 +25,10 @@ const appRoutes: Routes = [
   {path: 'categorie' , component: CategorieComponent},
   {path: 'marque' , component: MarqueComponent},
   {path: 'VoiturePrincing' , component: VoiturePricingComponent},
-  {path: 'Voiture' , component: VoitureComponent}
+  {path: 'Voiture' , component: VoitureComponent},
+  {path: 'Client' , component: ClientComponent},
+  {path: 'Note' , component: NoteComponent },
+  {path: 'Review' , component: ReviewComponent}
 ]
 @NgModule({
   declarations: [

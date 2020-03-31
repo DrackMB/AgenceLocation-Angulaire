@@ -1,1 +1,60 @@
-<p>review works!</p>
+
+<div class="card col-md-6 m-3">
+  <div class="card-header">Ajouter un review</div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <label>Corps</label>
+        <input type="text" [(ngModel)]="review.corps" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label >Voiture</label> <select name="marque" >
+        <option  *ngFor="let v of voitureResult  ">{{v.categorie.marque}}</option>
+      </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label >Note</label> <select name="marque">
+        <option  *ngFor="let n of  notes ">{{n.libelle}}</option>
+      </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label >Client</label> <select name="marque">
+        <option  *ngFor="let c of clientsall ">{{c.nom}}</option>
+      </select>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class=" btn btn-block  btn-outline-dark" (click)="save()">save</button>
+
+    </div>
+  </div>
+</div>
+<div><p>listes des reviews</p></div>
+<table class="table table-striped col-md-6 m-3">
+  <thead>
+  <tr>
+    <th>Corps</th>
+    <th>voiture</th>
+    <th>note</th>
+    <th>client</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let r of reviews ">
+    <td>{{r.corps}}</td>
+    <td>{{r.voiture.categorie}}</td>
+    <td>{{r.note}}</td>
+    <td>{{r.client.nom}}</td>
+    <td>
+      <button class=" btn btn-block  btn-outline-dark" (click)="delete()">delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+

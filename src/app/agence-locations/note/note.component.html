@@ -1,1 +1,40 @@
-<p>note works!</p>
+
+<div class="card-header">Ajouter une note</div>
+<div class="card-body">
+
+  <div class="row">
+    <div class="col-md-12">
+      <label>Libelle</label>
+      <input type="text" class="form-control" [(ngModel)]="note.libelle">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <label>Moyen</label>
+      <input type="number" class="form-control" [(ngModel)]="note.moyen">
+    </div>
+  </div>
+</div>
+
+
+<div class="card-footer">
+  <button class=" btn btn-block  btn-outline-dark" (click)="save()">Ajouter</button>
+
+</div>
+<div>
+<table class="table table-striped col-md-6 m-3">
+        <thead>
+        <tr>
+          <th>libelle</th>
+          <th>moyen</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let c of notes">
+          <td>{{c.libelle}}</td>
+          <td>{{c.moyen}}</td>
+          <td><button class=" btn btn-block  btn-outline-dark" (click)="delete(c.libelle)">delete</button></td>
+        </tr>
+        </tbody>
+      </table>

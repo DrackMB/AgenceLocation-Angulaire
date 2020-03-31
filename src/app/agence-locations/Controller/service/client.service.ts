@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Client} from '../model/client.model';
+import {Agence} from '../model/agence.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +11,16 @@ export class ClientService {
    private _clients: Array <Client>;
   constructor(private http: HttpClient) {}
 
-public save(){
-    this.http.post<number>('http://localhost:9090/AgenceLocation/client/',this._client).subscribe(
+public save() {
+    this.http.post<number>('http://localhost:9090/AgenceLocation/client/', this.client).subscribe(
       data => {
+         this.clients.push(this.cloneClient(this.client));
+         this.client = null;
          console.log(data);
       }, error => {
          console.log('kayen chi7aja f client');
       }
-    )
+    );
 }
 public findAll(){
     this.http.get<Array<Client>>('http://localhost:9090/AgenceLocation/client/').subscribe(
@@ -49,7 +52,8 @@ public findAll(){
 
   get client(): Client {
     if(this._client == null){
-      this._client = new Client();
+      this._client = new Client()
+      ;
     }
     return this._client;
   }
@@ -68,4 +72,15 @@ public findAll(){
   set clients(value: Array<Client>) {
     this._clients = value;
   }
+  cloneClient(client: Client ) {
+    const myCloner = new Client();
+    myCloner.nom = client.nom;
+    myCloner.prenom = client.prenom;
+    myCloner.sexe = client.sexe;
+    myCloner.cin = client.cin;
+    myCloner.adress = client.adress;
+    return myCloner;
+
+  }
+
 }
