@@ -1,5 +1,5 @@
 
-<div class="card">
+<div class="card col-md-6 m-3">
   <div class="card-header">Ajouter Carburant</div>
   <div class="card-body">
     <div class="row">
@@ -9,17 +9,19 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12 ">
+      <div class="col-md-12  ">
         <label >Carburant</label> <select name="carburant"  class="form-control" >
         <option  *ngFor="let c of carburants">{{c.libelle}}</option>
       </select>
       </div>
     </div>
+  </div>
     <div class="card-footer">
       <button class=" btn btn-block  btn-outline-dark" (click)="save()">Ajouter</button>
-
     </div>
-    <div class="card">
+  </div>
+
+    <div class="card col-md-6 m-3">
       <div class="card-header">find by Carburant Libelle</div>
       <div class="card-body">
         <div class="row">
@@ -34,21 +36,23 @@
             <ng-template #elseBlock class="text-danger">Carburant n'exist pas</ng-template>
           </div>
         </div>
+      </div>
         <div class="card-footer">
           <button class=" btn btn-block  btn-outline-dark" id="b1" (click)="findByLibelle(carburant);test=true">rechercher</button>
-
         </div>
+      </div>
 
-        <div class="card">
+        <div class="card col-md-6 m-3">
           <div class="card-header">Delete Carburant Libelle</div>
           <div class="card-body">
             <div class="row">
               <div class="col-md-12">
                 <label>Libelle</label>
-                <input type="text" class="form-control" [(ngModel)]="cloneCarburant(carburant).libelle">
+                <input type="text" class="form-control" [(ngModel)]="carburant.libelle">
               </div>
             </div>
+          </div>
             <div class="card-footer">
               <button class=" btn btn-block  btn-outline-dark" (click)="deleteByLibelle(carburant)">Delete</button>
-
             </div>
+        </div>

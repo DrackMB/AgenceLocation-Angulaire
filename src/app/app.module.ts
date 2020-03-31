@@ -14,11 +14,18 @@ import { PromoComponent } from './agence-locations/promo/promo.component';
 import {AgenceComponent} from './agence-locations/agence/agence.component';
 import {CategorieComponent} from './agence-locations/categorie/categorie.component';
 import {MarqueComponent} from './agence-locations/marque/marque.component';
+import { NoteComponent } from './agence-locations/note/note.component';
+import { ClientComponent } from './agence-locations/client/client.component';
+import { ReviewComponent } from './agence-locations/review/review.component';
 
 const appRoutes: Routes = [
   {path: 'Carburant' , component: CarburantComponent},
   {path: 'Transmition' , component: TransmitionComponent},
-  {path: 'VoiturePrincing' , component: VoiturePricingComponent}
+  {path: 'Agence' , component: AgenceComponent},
+  {path: 'categorie' , component: CategorieComponent},
+  {path: 'marque' , component: MarqueComponent},
+  {path: 'VoiturePrincing' , component: VoiturePricingComponent},
+  {path: 'Voiture' , component: VoitureComponent}
 ]
 @NgModule({
   declarations: [
@@ -31,7 +38,10 @@ const appRoutes: Routes = [
     PromoComponent,
     AgenceComponent,
     CategorieComponent,
-    MarqueComponent
+    MarqueComponent,
+    NoteComponent,
+    ClientComponent,
+    ReviewComponent
   ],
     imports: [
         BrowserModule,

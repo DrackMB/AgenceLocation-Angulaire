@@ -77,9 +77,9 @@ export class VoitureService {
       }
     );
   }
-  public deleteByReference(voiture: Voiture){
+  public deleteByReference(voiture: Voiture) {
    const index = this.voitureResult.findIndex(v => v.matricule === voiture.matricule);
-    if(index !== -1){
+    if (index !== -1){
       this.voitureResult.splice(index, 1);
     }
   }
@@ -141,14 +141,14 @@ export class VoitureService {
 
   private cloneVoiture(voiture : Voiture) {
     const myClon = new Voiture();
-    myClon.agence =voiture.agence;
+    myClon.agence = voiture.agence;
     myClon.carburant = voiture.carburant;
-    myClon.categorie= voiture.categorie;
-    myClon.transmition=voiture.transmition;
-    myClon.dateMiseEnCirculation =voiture.dateMiseEnCirculation;
-    myClon.matricule =voiture.matricule;
-    myClon.moyenNote= voiture.moyenNote;
-    myClon.prixinitial =voiture.prixinitial;
+    myClon.categorie = voiture.categorie;
+    myClon.transmition  = voiture.transmition;
+    myClon.dateMiseEnCirculation = voiture.dateMiseEnCirculation;
+    myClon.matricule = voiture.matricule;
+    myClon.moyenNote = voiture.moyenNote;
+    myClon.prixinitial = voiture.prixinitial;
     return myClon;
   }
 }

@@ -10,7 +10,6 @@ export class CarburantService {
   private _carburants: Array<Carburant>;
   private _carburant: Carburant;
   private _carburantfoanded: Carburant;
-  private _msgError: string;
   private url = 'http://localhost:9090/AgenceLocation/carburant/';
 
   constructor(private http: HttpClient) { }
@@ -29,7 +28,7 @@ export class CarburantService {
       data => {
          console.log(data);
          if (data > 0) {
-           this.carburants.push(carburant);
+           this.carburants.push(this.cloneCarburant(carburant));
            this.carburant = null;
          }
       }, error => {
