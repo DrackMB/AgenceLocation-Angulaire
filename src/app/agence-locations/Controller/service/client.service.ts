@@ -22,7 +22,7 @@ public save() {
       }
     );
 }
-public findAll(){
+public findAll() {
     this.http.get<Array<Client>>('http://localhost:9090/AgenceLocation/client/').subscribe(
       data => {
         this._clients = data;
@@ -32,7 +32,7 @@ public findAll(){
     );
 }
   public  findByCin() {
-    this.http.get<Client>('http://localhost:9090/AgenceLocation/client/cin/' + this._client.cin).subscribe(
+    this.http.get<Client>('http://localhost:9090/AgenceLocation/client/cin/' + this.client.cin).subscribe(
       data => {
           console.log(data);
       }, error => {
@@ -41,7 +41,7 @@ public findAll(){
     );
   }
   public  deleteByCin() {
-    this.http.delete('http://localhost:9090/AgenceLocation/client/cin/' + this._client.cin).subscribe(
+    this.http.delete('http://localhost:9090/AgenceLocation/client/cin/' + this.client.cin).subscribe(
       data => {
         console.log(data);
       }, error => {

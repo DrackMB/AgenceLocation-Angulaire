@@ -52,7 +52,7 @@ export class NoteService {
   public findAll() {
     this.http.get<Array<Note>>('http://localhost:9090/AgenceLocation/note/fin/').subscribe(
       data => {
-        this._notes = data;
+        this.notes = data;
       }, error => {
         console.log('chi7aja fl find dyal not');
       }
