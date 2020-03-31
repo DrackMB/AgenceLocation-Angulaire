@@ -26,9 +26,9 @@ export class MarqueService {
       }
     );
   }
-  public findall(){
+  public findall() {
     this.http.get<Array<Marque>>('http://localhost:9090/agencelocation/marque/').subscribe(
-      data =>{
+      data => {
         this._marques = data;
         console.log('ha data');
       },
@@ -37,22 +37,21 @@ export class MarqueService {
       }
     );
   }
-  findByMarqueLibelle(marque: Marque){
-    this.http.get<Array<Categorie>>('http://localhost:9090/agencelocation/categorie/cat/libelle/'+ marque.libelle ).subscribe(
-      data =>{
+  findByMarqueLibelle(marque: Marque) {
+    this.http.get<Array<Categorie>>('http://localhost:9090/agencelocation/categorie/cat/libelle/' + marque.libelle ).subscribe(
+      data => {
        this.marque.categorie = data;
-        console.log('passe bien');
+       console.log('passe bien');
       },
       error => {
         console.log('erreur');
       }
     );
-
   }
-  public findByLibelle(libelle: string){
-    this.http.get<string>('http://localhost:9090/agencelocation/libelle/{libelle}').subscribe(
+  public findByLibelle(marque: Marque) {
+    this.http.get<Marque>('http://localhost:9090/agencelocation/marque/libelle/' + marque.libelle).subscribe(
       data => {
-        this._marque.libelle = data;
+        this.marque = data;
       },
       error => {
         console.log('il y a une erreur quelque part');
@@ -80,7 +79,7 @@ export class MarqueService {
 
   get marques(): Array<Marque> {
     if (this._marques == null) {
-      this._marques = new Array<Marque>();}
+      this._marques = new Array<Marque>(); }
 
     return this._marques;
   }

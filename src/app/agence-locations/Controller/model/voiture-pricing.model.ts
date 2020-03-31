@@ -5,7 +5,7 @@ export class VoiturePricing {
   public dateDebut: Date;
   public datefin: Date;
   public agence: Agence;
-  public categorie: Categorie
+  public categorie: Categorie;
   public prix: number;
 
 

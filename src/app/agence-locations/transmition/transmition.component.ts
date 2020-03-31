@@ -13,7 +13,7 @@ export class TransmitionComponent implements OnInit {
   get transmitions(): Array<Transmition> {
     return this.transmitionService.transmitions;
   }
-  get transmition(): Transmition{
+  get transmition(): Transmition {
     return this.transmitionService.transmition;
   }
 
@@ -25,5 +25,9 @@ export class TransmitionComponent implements OnInit {
   }
   findByLibelle() {
     this.transmitionService.findByLibelle();
+  }
+
+  public findByTransmitionLibelle(transmition: Transmition) {
+    this.transmitionService.findByTransmitionLibelle(transmition);
   }
 }

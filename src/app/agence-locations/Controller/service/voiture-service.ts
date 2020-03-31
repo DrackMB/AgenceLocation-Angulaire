@@ -13,14 +13,14 @@ import {Marque} from '../model/marque.model';
 export class VoitureService {
   private _voiture: Voiture;
   private _voitureResult: Array<Voiture>;
-  private _agence : Agence;
+  private _agence: Agence;
   private _transmition: Transmition;
   private _carburant: Carburant;
   private _categorie: Categorie;
 
 
   get categorie(): Categorie {
-    if(this._categorie == null){
+    if (this._categorie == null) {
       this._categorie = new Categorie();
     }
     return this._categorie;
@@ -31,7 +31,7 @@ export class VoitureService {
   }
 
   get carburant(): Carburant {
-    if(this._carburant == null){
+    if (this._carburant == null) {
       this._carburant = new Carburant();
     }
     return this._carburant;
@@ -42,7 +42,7 @@ export class VoitureService {
   }
 
   get transmition(): Transmition {
-    if(this._transmition == null){
+    if (this._transmition == null) {
       this._transmition = new Transmition();
     }
     return this._transmition;
@@ -53,7 +53,7 @@ export class VoitureService {
   }
 
   get agence(): Agence {
-    if(this._agence == null){
+    if (this._agence == null) {
       this._agence = new Agence();
     }
 
@@ -66,26 +66,16 @@ export class VoitureService {
 
   constructor( private http: HttpClient) { }
 
-  public findAll() {
-    this.http.get<Array <Voiture>> ('http://localhost:9090/agencelocation/voiture/').subscribe(
-      data => {
-           console.log('ha  data jat' + data);
-           this._voitureResult = data;
-       }, error => {
-             console.log('kayen chi mochkil');
 
-      }
-    );
-  }
   public deleteByReference(voiture: Voiture) {
    const index = this.voitureResult.findIndex(v => v.matricule === voiture.matricule);
-    if (index !== -1){
+   if (index !== -1) {
       this.voitureResult.splice(index, 1);
     }
   }
 
-  public deleteByMatricule(voiture: Voiture){
-    this.http.delete<number> ('http://localhost:9090/agencelocation/voiture/voit/matricule/'+ voiture.matricule).subscribe(
+  public deleteByMatricule(voiture: Voiture) {
+    this.http.delete<number> ('http://localhost:9090/agencelocation/voiture/voit/matricule/' + voiture.matricule).subscribe(
       data => {
         this.deleteByReference(voiture);
         console.log('parfait' + data);
@@ -95,8 +85,52 @@ export class VoitureService {
 
       }
     );
+  }
 
+  public findall() {
+    this.http.get<Array<Voiture>>('http://localhost:9090/agencelocation/voiture/').subscribe(
+      data => {
+        this.voitureResult = data;
+        console.log('data existe');
+      },
+      error => {
+        console.log('il ya un probleme quelque part');
+      }
+    );
+  }
 
+ public findByCategorieLibelleAndAgeneNom(categorie: Categorie , agence: Agence) {
+    this.http.get<Array<Voiture>>('http://localhost:9090/agencelocation/voiture/Catgagc/libelle/' + categorie.libelle + '/nom/' + agence.nom).subscribe(
+      data => {
+        this.voitureResult = data;
+        console.log('passe bien');
+      },
+      error => {
+        console.log('erreur');
+      }
+    );
+  }
+
+  public findByCategorieLibelleAndAgenecode(categorie: Categorie , agence: Agence) {
+    this.http.get<Array<Voiture>>('http://localhost:9090/agencelocation/voiture/libelle/' + categorie.libelle + '/nom/' + agence.code).subscribe(
+      data => {
+        this.voitureResult = data;
+        console.log('passe bien');
+      },
+      error => {
+        console.log('erreur');
+      }
+    );
+  }
+  public findByMatricule(voiture: Voiture) {
+    this.http.get<Voiture>('http://localhost:9090/agencelocation/voiture/matricule/' + voiture.matricule).subscribe(
+      data => {
+        this.voiture = data;
+      },
+      error => {
+        console.log('il y a une erreur quelque part');
+      }
+    );
   }
 
   public save2() {
@@ -117,7 +151,7 @@ export class VoitureService {
 
 
   get voiture(): Voiture {
-    if(this._voiture == null){
+    if (this._voiture == null) {
       this._voiture = new Voiture();
     }
     return this._voiture;
@@ -128,7 +162,7 @@ export class VoitureService {
   }
 
   get voitureResult(): Array<Voiture> {
-    if(this._voitureResult == null){
+    if (this._voitureResult == null) {
       this._voitureResult = new Array<Voiture>();
     }
     return this._voitureResult;
@@ -139,12 +173,12 @@ export class VoitureService {
   }
 
 
-  private cloneVoiture(voiture : Voiture) {
+  private cloneVoiture(voiture: Voiture) {
     const myClon = new Voiture();
     myClon.agence = voiture.agence;
     myClon.carburant = voiture.carburant;
     myClon.categorie = voiture.categorie;
-    myClon.transmition  = voiture.transmition;
+    myClon.transmition = voiture.transmition;
     myClon.dateMiseEnCirculation = voiture.dateMiseEnCirculation;
     myClon.matricule = voiture.matricule;
     myClon.moyenNote = voiture.moyenNote;

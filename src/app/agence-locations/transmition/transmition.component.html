@@ -19,4 +19,21 @@
     <button class=" btn btn-block  btn-outline-dark" (click)="save()">Ajouter</button>
 
   </div>
+  </div>
+
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>libelle</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let c of transmitions">
+      <td>{{c.libelle}}</td>
+      <td><button class="btn btn-danger btn-sm fa fa-plus " (click)="findByTransmitionLibelle(c)"></button></td>
+    </tr>
+    </tbody>
+  </table>
 

@@ -101,7 +101,7 @@ export class VoiturePricingService {
 
 
   get voiturePrincins(): Array<VoiturePricing> {
-    if(this._voiturePrincins == null) {
+    if (this._voiturePrincins == null) {
       this._voiturePrincins = new Array<VoiturePricing>();
     }
     return this._voiturePrincins;
