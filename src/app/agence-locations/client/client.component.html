@@ -65,10 +65,32 @@
 
   <div class="card-header">trouver un client</div>
   <div class="card-body">
+
     <div class="form-group">
-      <label>Libelle</label>
+
+      <label>cin</label>
       <input type="text" class="form-control" [(ngModel)]="client.cin">
     </div>
+    <table class="table table-striped col-md-6 m-3 ">
+      <thead>
+      <tr>
+        <th>cin</th>
+        <th>nom</th>
+        <th>prenom</th>
+        <th>sexe</th>
+        <th>adresse</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{client.cin}}</td>
+        <td>{{client.nom}}</td>
+        <td>{{client.prenom}}</td>
+        <td>{{client.sexe}}</td>
+        <td>{{client.adress}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
   <div class="card-footer">
     <button class="btn btn-outline-dark btn-block" (click)="findcin(client.cin)">trouver</button>
