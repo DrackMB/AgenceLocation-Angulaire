@@ -80,9 +80,106 @@
     <div class="card-footer">
       <button class=" btn btn-block  btn-outline-dark" (click)="save2()">Ajouter</button>
     </div>
-    <label >liste des voitures </label> <select name="voiture" class="col-md-auto"  (click)="findall()" >
+
+  <label>listes des voitures  </label>
+  <select name="voiture" class="col-md-auto"  (click)="findall()" >
     <option  *ngFor="let f of voitureResult">{{f.categorie.libelle}}</option>
   </select>
-
 </div>
+
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>categorie</th>
+      <th>carburant</th>
+      <th>transmition</th>
+      <th>matricule</th>
+      <th>dateMiseEnCirculation</th>
+      <th>moyenNote</th>
+      <th>agence</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let cl of transmiton.voiture ">
+      <td>{{cl.categorie.libelle}}</td>
+      <td>{{cl.carburant.libelle}}</td>
+      <td>{{cl.transmition.libelle}}</td>
+      <td>{{cl.matricule}}</td>
+      <td>{{cl.dateMiseEnCirculation}}</td>
+      <td>{{cl.moyenNote}}</td>
+      <td>{{cl.agence.nom}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>categorie</th>
+    <th>carburant</th>
+    <th>transmition</th>
+    <th>matricule</th>
+    <th>dateMiseEnCirculation</th>
+    <th>moyenNote</th>
+    <th>agence</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let cf of carburant.voiture ">
+    <td>{{cf.categorie.libelle}}</td>
+    <td>{{cf.carburant.libelle}}</td>
+    <td>{{cf.transmition.libelle}}</td>
+    <td>{{cf.matricule}}</td>
+    <td>{{cf.dateMiseEnCirculation}}</td>
+    <td>{{cf.moyenNote}}</td>
+    <td>{{cf.agence.nom}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>categorie</th>
+    <th>carburant</th>
+    <th>transmition</th>
+    <th>matricule</th>
+    <th>dateMiseEnCirculation</th>
+    <th>moyenNote</th>
+    <th>agence</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let cf of agence.voiture ">
+    <td>{{cf.categorie.libelle}}</td>
+    <td>{{cf.carburant.libelle}}</td>
+    <td>{{cf.transmition.libelle}}</td>
+    <td>{{cf.matricule}}</td>
+    <td>{{cf.dateMiseEnCirculation}}</td>
+    <td>{{cf.moyenNote}}</td>
+    <td>{{cf.agence.nom}}</td>
+  </tr>
+  </tbody>
+</table>
+
+
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>matricule</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let cf of voitureResult ">
+    <td>{{cf.matricule}}</td>
+    <td><button class="btn btn-sm fa fa-plus " (click)="findByMatricule(cf)"></button></td>
+  </tr>
+  </tbody>
+</table>
+
+
 

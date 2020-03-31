@@ -24,12 +24,12 @@ export class MarqueComponent implements OnInit {
   public findall() {
     this.marqueService.findall();
   }
-  public findByMarqueLibelle(marque: Marque){
+  public findByMarqueLibelle(marque: Marque) {
     this.marqueService.findByMarqueLibelle(marque);
   }
 
-  public findByLibelle(libelle: string) {
-    this.marqueService.findByLibelle('libelle')
+  public findByLibelle(marque: Marque) {
+    this.marqueService.findByLibelle(marque);
   }
   get marques(): Array<Marque> {
     return this.marqueService.marques;

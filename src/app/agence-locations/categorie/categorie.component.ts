@@ -3,6 +3,8 @@ import {Categorie} from '../Controller/model/categorie.model';
 import {MarqueService} from '../Controller/service/marque.service';
 import {CategorieService} from '../Controller/service/categorie.service';
 import {Marque} from '../Controller/model/marque.model';
+import {Voiture} from '../Controller/model/voiture.model';
+import {VoitureService} from '../Controller/service/voiture-service';
 
 @Component({
   selector: 'app-categorie',
@@ -16,17 +18,14 @@ export class CategorieComponent implements OnInit {
   ngOnInit(): void {
     this.marqueService.findall();
   }
-  get marques(): Array<Marque>{
+  get marques(): Array<Marque> {
     return this.marqueService.marques;
   }
 
-  get marque(): Marque{
+  get marque(): Marque {
     return this.marqueService.marque;
   }
 
-  public findByLibelle(libelle: string) {
-    this.categorieService.findByLibelle('libelle')
-  }
 
   get categorie(): Categorie {
     return this.categorieService.categorie;
@@ -35,7 +34,11 @@ export class CategorieComponent implements OnInit {
     return this.categorieService.categories;
   }
 
-  public save1(){
+  public  findBylibelle(categorie: Categorie) {
+    return this.categorieService.findBylibelle(categorie);
+  }
+
+  public save1() {
     return this.categorieService.save1();
   }
   public findall() {

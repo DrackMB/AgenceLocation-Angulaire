@@ -27,7 +27,7 @@ export class VoiturePricingComponent implements OnInit {
     return this.voiturePricingService.voiturePricing;
   }
   ngOnInit(): void {
-    this.voitureService.findAll();
+    this.voitureService.findall();
   }
 
   save(voiturePricing: VoiturePricing) {

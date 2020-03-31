@@ -19,29 +19,49 @@ export class VoitureComponent implements OnInit {
   get voitureResult(): Array<Voiture> {
     return this.voitureService.voitureResult;
   }
-  constructor(private voitureService: VoitureService ,private agenceService: AgenceService,private  categorieService: CategorieService ,private carburantService: CarburantService ,private transmitionService: TransmitionService) { }
+  constructor(private voitureService: VoitureService , private agenceService: AgenceService, private  categorieService: CategorieService , private carburantService: CarburantService , private transmitionService: TransmitionService) { }
   ngOnInit(): void {
-  this.voitureService.findAll();
+
+    this.voitureService.findall();
     this.agenceService.findall();
     this.transmitionService.findAll();
     this.carburantService.findAll();
     this.transmitionService.findAll();
   }
+
+  public findall() {
+    return this.voitureService.findall();
+  }
   public save2() {
     return this.voitureService.save2();
   }
-  public deletByMatricule(voiture: Voiture){
+  public deletByMatricule(voiture: Voiture) {
     return this.voitureService.deleteByMatricule(voiture);
   }
-  public findall(){
-    return this.voitureService.findAll();
+
+  public findByCategorieLibelleAndAgeneNom(categorie: Categorie , agence: Agence) {
+    return this.voitureService.findByCategorieLibelleAndAgeneNom(categorie, agence);
   }
-  get voiture():Voiture {
+
+  get voiture(): Voiture {
     return this.voitureService.voiture;
   }
 
+
+  public findByMatricule(voiture: Voiture) {
+    return this.voitureService.findByMatricule(voiture);
+  }
+
+  public findByCategorieLibelleAndAgenecode(categorie: Categorie , agence: Agence) {
+    return this.voitureService.findByCategorieLibelleAndAgenecode(categorie, agence);
+  }
+
+
   get agences(): Array<Agence> {
     return this.agenceService.agences;
+  }
+  get agence(): Agence {
+    return this.agenceService.agence;
   }
 
   get carburants(): Array<Carburant> {
@@ -52,5 +72,11 @@ export class VoitureComponent implements OnInit {
   }
   get categories(): Array<Categorie> {
     return this.categorieService.categories;
+  }
+  get transmiton(): Transmition {
+    return this.transmitionService.transmition;
+  }
+  get carburant(): Carburant {
+    return this.carburantService.carburant;
   }
 }

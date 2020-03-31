@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Categorie} from '../model/categorie.model';
 import {Agence} from '../model/agence.model';
-import {Marque} from '../model/marque.model';
-import {Carburant} from '../model/carburant.model';
+import {Voiture} from '../model/voiture.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +12,9 @@ export class AgenceService {
 
   private _agences: Array<Agence>;
 
-  public findall(){
+  public findall() {
     this.http.get<Array<Agence>>('http://localhost:9090/AgenceLocation/agence/').subscribe(
-      data =>{
+      data => {
         this._agences = data;
         console.log('les données');
       },
@@ -46,6 +44,30 @@ export class AgenceService {
 
   set agences(value: Array<Agence>) {
     this._agences = value;
+  }
+
+  public findByCode(agence: Agence) {
+    this.http.get<Array<Voiture>>('http://localhost:9090/agencelocation/voiture/code/' + agence.code).subscribe(
+      data => {
+        this.agence.voiture = data;
+        console.log('passe bien');
+      },
+      error => {
+        console.log('erreur');
+      }
+    );
+  }
+
+  public findByNom(agence: Agence) {
+    this.http.get<Array<Voiture>>('http://localhost:9090/AgenceLocation/agence/nom/' + agence.nom).subscribe(
+      data => {
+        this.agence.voiture = data;
+        console.log('passe bien');
+      },
+      error => {
+        console.log('erreur');
+      }
+    );
   }
 
   constructor(private http: HttpClient) { }

@@ -19,7 +19,7 @@ const appRoutes: Routes = [
   {path: 'Carburant' , component: CarburantComponent},
   {path: 'Transmition' , component: TransmitionComponent},
   {path: 'VoiturePrincing' , component: VoiturePricingComponent}
-]
+];
 @NgModule({
   declarations: [
     AppComponent,

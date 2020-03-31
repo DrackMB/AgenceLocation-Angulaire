@@ -28,6 +28,10 @@ export class CarburantComponent implements OnInit {
     this.carburantService.save(this.carburant);
   }
 
+  findByCarburantLibelle(carburant: Carburant) {
+    return this.carburantService.findByCarburantLibelle(carburant);
+  }
+
   findByLibelle(carburant: Carburant) {
     return this.carburantService.findByLibelle(carburant);
   }

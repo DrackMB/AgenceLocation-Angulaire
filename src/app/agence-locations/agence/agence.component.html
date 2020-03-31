@@ -5,4 +5,22 @@
 </select>
   </div>
 
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>nom agence</th>
+    <th>code </th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let c of agences">
+    <td>{{c.nom}}</td>
+    <td>{{c.code}}</td>
+    <td><button class="btn btn-danger btn-sm fa fa-plus " (click)="findByCode(c)"></button></td>
+  </tr>
+  </tbody>
+</table>
+
+
 

@@ -15,12 +15,18 @@ export class AgenceComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+
   get agence(): Agence {
     return this.agenceService.agence;
 
   }
 
-  get agences(): Array<Agence>{
+  public findByCode(agence: Agence) {
+    return this.agenceService.findByCode(agence);
+  }
+
+  get agences(): Array<Agence> {
     return this.agenceService.agences;
 
   }
