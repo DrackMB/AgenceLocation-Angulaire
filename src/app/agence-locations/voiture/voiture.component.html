@@ -1,31 +1,38 @@
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th>categorie</th>
-    <th>carburant</th>
-    <th>transmition</th>
-    <th>matricule</th>
-    <th>dateMiseEnCirculation</th>
-    <th>moyenNote</th>
-    <th>agence</th>
-    <th>Action</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let c of voitureResult">
-    <td>{{c.categorie.libelle}}</td>
-    <td>{{c.carburant.libelle}}</td>
-    <td>{{c.transmition.libelle}}</td>
-    <td>{{c.matricule}}</td>
-    <td>{{c.dateMiseEnCirculation}}</td>
-    <td>{{c.moyenNote}}</td>
-    <td>{{c.agence.nom}}</td>
-    <td><button class="btn btn-sm fa fa-trash " (click)="deletByMatricule(c)"></button></td>
-  </tr>
-  </tbody>
-</table>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table table-striped m-3 col-md-6">
+        <thead>
+        <tr>
+          <th>categorie</th>
+          <th>carburant</th>
+          <th>transmition</th>
+          <th>matricule</th>
+          <th>dateMiseEnCirculation</th>
+          <th>moyenNote</th>
+          <th>agence</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let c of voitureResult">
+          <td>{{c.categorie.libelle}}</td>
+          <td>{{c.carburant.libelle}}</td>
+          <td>{{c.transmition.libelle}}</td>
+          <td>{{c.matricule}}</td>
+          <td>{{c.dateMiseEnCirculation}}</td>
+          <td>{{c.moyenNote}}</td>
+          <td>{{c.agence.nom}}</td>
+          <td><button class="btn btn-sm fa fa-trash " (click)="deletByMatricule(c)"></button></td>
+        </tr>
+        </tbody>
+      </table>
 
-<div class="card">
+    </div>
+  </div>
+</div>
+
+<div class="card col-md-6 m-3" >
   <div class="card-header">Ajouter une voiture</div>
   <div class="card-body">
 
