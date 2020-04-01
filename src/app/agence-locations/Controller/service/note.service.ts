@@ -7,12 +7,22 @@ import {Client} from '../model/client.model';
   providedIn: 'root'
 })
 export class NoteService {
+  private _notesall: Array<Note>;
   private _note: Note;
   private _notes: Array<Note>;
 
   constructor(private http: HttpClient) {
   }
+  get notesall(): Array<Note> {
+    if (this._notesall == null) {
+      this._notesall = new Array<Note>();
+    }
+    return this._notesall;
+  }
 
+  set notesall(value: Array<Note>) {
+    this._notesall = value;
+  }
 
   get note(): Note {
     if (this._note == null) {
@@ -52,15 +62,15 @@ export class NoteService {
   public findAll() {
     this.http.get<Array<Note>>('http://localhost:9090/AgenceLocation/note/fin/').subscribe(
       data => {
-        this.notes = data;
+        this.notesall = data;
       }, error => {
-        console.log('chi7aja fl find dyal not');
+        console.log('error in note');
       }
     );
   }
 
-  public deleteNote() {
-    this.http.delete<number>('http://localhost:9090/AgenceLocation/note/libelle/' + this._note.libelle).subscribe(
+  public deleteNote(note: Note) {
+    this.http.delete<number>('http://localhost:9090/AgenceLocation/note/libelle/' + note.libelle).subscribe(
       data => {
         console.log(data);
       }, error => {
