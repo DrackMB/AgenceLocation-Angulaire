@@ -28,7 +28,7 @@ export class ReviewComponent implements OnInit {
     return this.noteService.notes;
   }
   public findall() {
-    return this.voitureService.findAll();
+    return this.voitureService.findall();
   }
   get review(): Review {
     return this.reviewService.review;

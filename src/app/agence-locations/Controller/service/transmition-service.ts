@@ -3,6 +3,7 @@ import {Transmition} from '../model/transmition.model';
 import {HttpClient} from '@angular/common/http';
 import {Categorie} from '../model/categorie.model';
 import {Voiture} from '../model/voiture.model';
+import {Carburant} from '../model/carburant.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class TransmitionService {
 
 
   constructor(private http: HttpClient) { }
+
   findAll() {
     this.http.get<Array<Transmition>>('http://localhost:9090/AgenceLocation/transmition/').subscribe(
       data => {
@@ -25,7 +27,12 @@ export class TransmitionService {
   save(transmition: Transmition) {
     this.http.post<number>('http://localhost:9090/AgenceLocation/transmition/', transmition).subscribe(
       data => {
-        console.log(data);
+        if(data > 0) {
+          this.transmitions.push(this.colneTransmition(transmition));
+          this.transmition = null;
+          console.log(data);
+        }
+
       }, error => {
         console.log('errooore f Tansmition');
       }
@@ -53,7 +60,19 @@ export class TransmitionService {
       }
     );
   }
+  deleteTransmition(transmition: Transmition) {
+    this.http.delete<number>('http://localhost:9090/AgenceLocation/transmition/libelle/' + transmition.libelle ).subscribe(
+      data => {
+        if (data > 0 ) {
+          this. deleteFromViwe(transmition);
+          console.log(data);
+        }
 
+      }, error => {
+          console.log(error);
+      }
+    )
+  }
 
 
   get transmition(): Transmition {
@@ -82,6 +101,12 @@ export class TransmitionService {
     const myCopie = new Transmition();
     myCopie.libelle = transmition.libelle;
     return myCopie;
+  }
+  private deleteFromViwe(transmition: Transmition) {
+    const index = this.transmitions.findIndex(c => c.libelle === transmition.libelle );
+    if (index !== -1) {
+      this.transmitions.splice(index, 1);
+    }
   }
 
 

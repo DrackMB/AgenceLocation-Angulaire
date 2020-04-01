@@ -1,5 +1,5 @@
 
-<div class="card col-md-6 m-3">
+<div class="card col-md-6 m-3" [hidden]="show">
   <div class="card-header">Ajouter Carburant</div>
   <div class="card-body">
     <div class="row">
@@ -21,7 +21,7 @@
     </div>
   </div>
 
-    <div class="card col-md-6 m-3">
+    <div class="card col-md-6 m-3" [hidden]="show1">
       <div class="card-header">find by Carburant Libelle</div>
       <div class="card-body">
         <div class="row">
@@ -41,18 +41,19 @@
           <button class=" btn btn-block  btn-outline-dark" id="b1" (click)="findByLibelle(carburant);test=true">rechercher</button>
         </div>
       </div>
-
-        <div class="card col-md-6 m-3">
-          <div class="card-header">Delete Carburant Libelle</div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-12">
-                <label>Libelle</label>
-                <input type="text" class="form-control" [(ngModel)]="carburant.libelle">
-              </div>
-            </div>
-          </div>
-            <div class="card-footer">
-              <button class=" btn btn-block  btn-outline-dark" (click)="deleteByLibelle(carburant)">Delete</button>
-            </div>
-        </div>
+<table class="table table-striped col-md-6 m-3" >
+  <thead>
+  <tr>
+    <th>libelle</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let cf of carburants ">
+    <td>{{cf.libelle}}</td>
+    <td><button class="btn btn-sm fa fa-trash " (click)="deleteByLibelle(cf)"></button></td>
+    <td><button class="btn btn-sm fa fa-plus-circle" (click)="show = false"></button></td>
+    <td><button class="btn btn-sm fa fa-s  fa fa-search " (click)="show1 = false"></button></td>
+  </tr>
+  </tbody>
+</table>

@@ -13,6 +13,7 @@ import {Marque} from '../model/marque.model';
 export class VoitureService {
   private _voiture: Voiture;
   private _voitureResult: Array<Voiture>;
+  private _voitureResultMB: Array<Voiture>;
   private _agence: Agence;
   private _transmition: Transmition;
   private _carburant: Carburant;
@@ -64,6 +65,19 @@ export class VoitureService {
     this._agence = value;
   }
 
+
+  get voitureResultMB(): Array<Voiture> {
+    if (this._voitureResultMB == null) {
+      this._voitureResultMB = new Array<Voiture>();
+    }
+
+    return this._voitureResultMB;
+  }
+
+  set voitureResultMB(value: Array<Voiture>) {
+    this._voitureResultMB = value;
+  }
+
   constructor( private http: HttpClient) { }
 
 
@@ -90,8 +104,8 @@ export class VoitureService {
   public findall() {
     this.http.get<Array<Voiture>>('http://localhost:9090/agencelocation/voiture/').subscribe(
       data => {
-        this.voitureResult = data;
-        console.log('data existe');
+        this.voitureResultMB = data;
+        console.log(data);
       },
       error => {
         console.log('il ya un probleme quelque part');

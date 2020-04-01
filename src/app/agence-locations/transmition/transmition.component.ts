@@ -20,6 +20,9 @@ export class TransmitionComponent implements OnInit {
   ngOnInit(): void {
     this.transmitionService.findAll();
   }
+  deleteTransmition(transmition: Transmition) {
+    this.transmitionService.deleteTransmition(transmition);
+  }
   save() {
     this.transmitionService.save(this.transmition);
   }
