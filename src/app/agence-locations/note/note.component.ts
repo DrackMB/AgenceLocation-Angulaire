@@ -17,18 +17,19 @@ export class NoteComponent implements OnInit {
      public save() {
     return this.noteService.save();
      }
-     public findall() {
-     this.noteService.findAll();
-     }
-     public delete(libelle: string) {
-      this.noteService.deleteNote();
+     public delete(note: Note) {
+      this.noteService.deleteNote(this.note);
      }
   get notes(): Array<Note> {
     return this.noteService.notes;
   }
+  get notesall(): Array<Note> {
+    return this.notesall;
+  }
 
 
     ngOnInit(): void {
+    this.noteService.findAll();
   }
 
 }

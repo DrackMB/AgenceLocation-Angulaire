@@ -31,10 +31,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let c of notes">
+        <tr *ngFor="let c of notesall">
           <td>{{c.libelle}}</td>
           <td>{{c.moyen}}</td>
-          <td><button class=" btn btn-block  btn-outline-dark" (click)="delete(c.libelle)">delete</button></td>
+          <td><button class=" btn btn-block  btn-outline-dark" (click)="delete(c)">delete</button></td>
         </tr>
         </tbody>
       </table>
