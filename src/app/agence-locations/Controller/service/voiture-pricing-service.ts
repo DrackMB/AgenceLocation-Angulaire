@@ -20,9 +20,7 @@ export class VoiturePricingService {
   constructor(private http: HttpClient) { }
   public save(voiturePricing: VoiturePricing) {
     console.log(voiturePricing);
-    this.http.post<number>(this.url + '/Porcentage/' + this.porcentage ,
-      voiturePricing
-    ).subscribe(
+    this.http.post<number>(this.url + '/Porcentage/' + this.porcentage , voiturePricing ).subscribe(
       data => {
         console.log(data);
         if (data > 0) {

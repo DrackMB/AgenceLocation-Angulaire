@@ -38,10 +38,10 @@ export class ReviewService {
   constructor(private http: HttpClient ) { }
 
   public findAll() {
-    this.http.get<Array <Review>> ('http://localhost:9090/agencelocation/review/').subscribe(
+    this.http.get<Array<Review>> ('http://localhost:9090/AgenceLocation/review/').subscribe(
       data => {
         console.log( data);
-        this._reviews = data;
+        this.reviews = data;
       }, error => {
         console.log('error');
 

@@ -24,7 +24,7 @@ export class NoteComponent implements OnInit {
     return this.noteService.notes;
   }
   get notesall(): Array<Note> {
-    return this.notesall;
+    return this.noteService.notesall;
   }
 
 
