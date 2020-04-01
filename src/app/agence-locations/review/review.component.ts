@@ -15,7 +15,6 @@ import {Voiture} from '../Controller/model/voiture.model';
 })
 export class ReviewComponent implements OnInit {
 
-  // tslint:disable-next-line:max-line-length
   constructor( private  reviewService: ReviewService , private voitureService: VoitureService, private noteService: NoteService , private clientService: ClientService) { }
 
   get voitureResult(): Array<Voiture> {

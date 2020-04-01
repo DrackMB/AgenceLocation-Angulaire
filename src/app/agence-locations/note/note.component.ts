@@ -18,7 +18,7 @@ export class NoteComponent implements OnInit {
     return this.noteService.save();
      }
      public findall() {
-     this.noteService.findAll();
+
      }
      public delete(libelle: string) {
       this.noteService.deleteNote();
@@ -29,6 +29,7 @@ export class NoteComponent implements OnInit {
 
 
     ngOnInit(): void {
+      this.noteService.findAll();
   }
 
 }
