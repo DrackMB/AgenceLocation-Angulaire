@@ -15,14 +15,19 @@ export class VoiturePricingService {
   private _agence: Agence;
   private _voiturePrincins: Array<VoiturePricing>;
   private _voiturePricingResult: VoiturePricing;
+  private  url = 'http://localhost:9090/VoiturePricing';
 
   constructor(private http: HttpClient) { }
   public save(voiturePricing: VoiturePricing) {
-    this.http.post<number>('http://localhost:9090/VoiturePricing/Porcentage/' + this.porcentage ,
-      voiturePricing
-    ).subscribe(
+    console.log(voiturePricing);
+    this.http.post<number>(this.url + '/Porcentage/' + this.porcentage , voiturePricing ).subscribe(
       data => {
-            console.log(data);
+        console.log(data);
+        if (data > 0) {
+          this.voiturePrincins.push(this.cloneSimple(voiturePricing));
+          console.log(data);
+        }
+
       }, error => {
           console.log('errorrrrr');
       }
@@ -30,9 +35,8 @@ export class VoiturePricingService {
 
   }
 
-  deleteByCategorieLibelle() {
-
-    this.http.delete<number>('http://localhost:9090/VoiturePricing/CategorieLibelle/' + this.cloneSimple(this.voiturePricing).categorie.libelle ).subscribe(
+  deleteByCategorieLibelle(voiturePricing: VoiturePricing) {
+    this.http.delete<number>(this.url + '/CategorieLibelle/' + voiturePricing.categorie.libelle ).subscribe(
       data => {
           console.log(data);
       }, error => {
@@ -41,7 +45,7 @@ export class VoiturePricingService {
     );
   }
   findByCategorieLibelle() {
-    this.http.get<VoiturePricing>('http://localhost:9090/VoiturePricing/CategorieLibelle/' + this.cloneSimple(this.voiturePricing).categorie.libelle).subscribe(
+    this.http.get<VoiturePricing>(this.url + '/CategorieLibelle/' + this.voiturePricing.categorie.libelle).subscribe(
       data => {
                this._voiturePricingResult = data;
       }, error => {
@@ -50,7 +54,7 @@ export class VoiturePricingService {
     );
   }
   updateVoiturePricing(voiturePricing: VoiturePricing) {
-    this.http.put<number>( 'http://localhost:9090/VoiturePricing/categorie/date/' + this.voiturePricing.datefin + '/porcentage/' + this.porcentage, voiturePricing ).subscribe(
+    this.http.put<number>( this.url + '/categorie/date/' + this.voiturePricing.datefin + '/porcentage/' + this.porcentage, voiturePricing ).subscribe(
        data => {
            console.log(data);
        }, error => {
@@ -59,7 +63,7 @@ export class VoiturePricingService {
     );
   }
   findByAgenceNom() {
-    this.http.get<Array<VoiturePricing>>('http://localhost:9090/VoiturePricing/Agence/nom/' + this.cloneAgence(this.agence).nom).subscribe(
+    this.http.get<Array<VoiturePricing>>(this.url + '/Agence/nom/' + this.cloneAgence(this.agence).nom).subscribe(
       data => {
           this.voiturePrincins = data;
       }, error => {
@@ -67,7 +71,15 @@ export class VoiturePricingService {
       }
     );
   }
-
+ findAllVoiturePricing() {
+    this.http.get<Array<VoiturePricing>>( this.url + '/' ).subscribe(
+      data => {
+          this.voiturePrincins = data;
+      }, error => {
+          console.log(error);
+      }
+    )
+ }
 
   get voiturePricing(): VoiturePricing {
     if (this._voiturePricing == null) {
@@ -101,7 +113,7 @@ export class VoiturePricingService {
 
 
   get voiturePrincins(): Array<VoiturePricing> {
-    if(this._voiturePrincins == null) {
+    if (this._voiturePrincins == null) {
       this._voiturePrincins = new Array<VoiturePricing>();
     }
     return this._voiturePrincins;

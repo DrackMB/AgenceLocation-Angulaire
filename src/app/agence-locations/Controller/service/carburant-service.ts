@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Carburant} from '../model/carburant.model';
 import {HttpClient} from '@angular/common/http';
 import {Transmition} from '../model/transmition.model';
+import {Voiture} from '../model/voiture.model';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +61,18 @@ export class CarburantService {
          }
       }, error => {
           console.log('eorre in delete');
+      }
+    );
+  }
+
+  findByCarburantLibelle(carburant: Carburant) {
+    this.http.get<Array<Voiture>>('http://localhost:9090/agencelocation/voiture/Carb/libelle/' + carburant.libelle).subscribe(
+      data => {
+        this.carburant.voiture = data;
+        console.log('passe bien');
+      },
+      error => {
+        console.log('erreur');
       }
     );
   }

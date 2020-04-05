@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {Marque} from '../model/marque.model';
 import {Categorie} from '../model/categorie.model';
 import {HttpClient} from '@angular/common/http';
+import {Voiture} from '../model/voiture.model';
+import {Agence} from '../model/agence.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +28,7 @@ export class CategorieService {
 
 
   constructor(private http: HttpClient) { }
-  public save1(){
+  public save1() {
   this.http.post<number>('http://localhost:9090/agencelocation/categorie/', this.categorie).subscribe(
     data => {
   if (data > 0) {
@@ -38,21 +40,11 @@ export class CategorieService {
 );
 }
 
-  public findByLibelle(libelle: string){
-    this.http.get<string>('http://localhost:9090/agencelocation/libelle/{libelle}').subscribe(
-      data => {
-        this._categorie.libelle = data;
-      },
-      error => {
-        console.log('il y a une erreur quelque part');
-      }
-    );
-  }
 
-  public findall(){
+  public findall() {
     this.http.get<Array<Categorie>>('http://localhost:9090/agencelocation/categorie/find').subscribe(
-      data =>{
-        this._categories = data;
+      data => {
+        this.categories = data;
         console.log('data existe');
       },
       error => {
@@ -60,6 +52,19 @@ export class CategorieService {
       }
     );
   }
+
+  public  findBylibelle(categorie: Categorie) {
+    this.http.get<Categorie>('http://localhost:9090/agencelocation/categorie/libelle' + categorie.libelle).subscribe(
+      data => {
+        this.categorie = data;
+        console.log('data existe');
+      },
+      error => {
+        console.log('erreur');
+      }
+    );
+  }
+
 
 
   private cloneCategorie(categorie: Categorie) {
@@ -72,7 +77,7 @@ export class CategorieService {
   }
 
   get categorie(): Categorie {
-    if (this._categorie == null){
+    if (this._categorie == null) {
       this._categorie = new Categorie();
     }
     return this._categorie;

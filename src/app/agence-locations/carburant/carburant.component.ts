@@ -10,6 +10,8 @@ import {Transmition} from '../Controller/model/transmition.model';
 })
 export class CarburantComponent implements OnInit {
    test = false;
+   show = true;
+   show1 = true;
   constructor(private carburantService: CarburantService) { }
   get carburants(): Array<Carburant> {
     return this.carburantService.carburants;
@@ -26,6 +28,10 @@ export class CarburantComponent implements OnInit {
   }
   save() {
     this.carburantService.save(this.carburant);
+  }
+
+  findByCarburantLibelle(carburant: Carburant) {
+    return this.carburantService.findByCarburantLibelle(carburant);
   }
 
   findByLibelle(carburant: Carburant) {

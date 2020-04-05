@@ -17,9 +17,13 @@ import {MarqueComponent} from './agence-locations/marque/marque.component';
 import { NoteComponent } from './agence-locations/note/note.component';
 import { ClientComponent } from './agence-locations/client/client.component';
 import { ReviewComponent } from './agence-locations/review/review.component';
-import { AdministrateurComponent } from './agence-locations/administrateur/administrateur.component';
-import { LocationComponent } from './agence-locations/location/location.component';
-import { LocationDetailComponent } from './agence-locations/location-detail/location-detail.component';
+import { PaysComponent } from './agence-locations/pays/pays.component';
+import { VilleComponent } from './agence-locations/ville/ville.component';
+import { EtatLieuComponent} from './agence-locations/etat-lieu/etat-lieu.component';
+import { EtatLieuItemsComponent} from './agence-locations/etat-lieu-items/etat-lieu-items.component';
+import { ConsigneComponent } from './agence-locations/consigne/consigne.component';
+
+
 
 const appRoutes: Routes = [
   {path: 'Carburant' , component: CarburantComponent},
@@ -29,7 +33,14 @@ const appRoutes: Routes = [
   {path: 'marque' , component: MarqueComponent},
   {path: 'VoiturePrincing' , component: VoiturePricingComponent},
   {path: 'Voiture' , component: VoitureComponent},
-  {path: 'administrateur' , component: AdministrateurComponent}
+  {path: 'Client' , component: ClientComponent},
+  {path: 'Note' , component: NoteComponent },
+  {path: 'Review' , component: ReviewComponent},
+  {path: 'Ville' , component: VilleComponent},
+  {path: 'Pays' , component: PaysComponent},
+  {path: 'Consigne' , component: ConsigneComponent},
+  {path: 'EtatLieu' , component: EtatLieuComponent},
+  {path: 'EtatLieuItems' , component: EtatLieuItemsComponent}
 ]
 @NgModule({
   declarations: [
@@ -46,9 +57,11 @@ const appRoutes: Routes = [
     NoteComponent,
     ClientComponent,
     ReviewComponent,
-    AdministrateurComponent,
-    LocationComponent,
-    LocationDetailComponent
+    PaysComponent,
+    VilleComponent,
+    EtatLieuComponent,
+    EtatLieuItemsComponent,
+    ConsigneComponent
   ],
     imports: [
         BrowserModule,

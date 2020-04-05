@@ -1,16 +1,20 @@
 import {Injectable} from '@angular/core';
 import {Transmition} from '../model/transmition.model';
 import {HttpClient} from '@angular/common/http';
+import {Categorie} from '../model/categorie.model';
+import {Voiture} from '../model/voiture.model';
+import {Carburant} from '../model/carburant.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransmitionService {
   private _transmitions: Array<Transmition>;
-  private _transmition : Transmition;
+  private _transmition: Transmition;
 
 
   constructor(private http: HttpClient) { }
+
   findAll() {
     this.http.get<Array<Transmition>>('http://localhost:9090/AgenceLocation/transmition/').subscribe(
       data => {
@@ -20,15 +24,31 @@ export class TransmitionService {
       }
     );
   }
-  save(transmition: Transmition){
+  save(transmition: Transmition) {
     this.http.post<number>('http://localhost:9090/AgenceLocation/transmition/', transmition).subscribe(
       data => {
-        console.log(data);
+        if(data > 0) {
+          this.transmitions.push(this.colneTransmition(transmition));
+          this.transmition = null;
+          console.log(data);
+        }
+
       }, error => {
-        console.log('errooore f Tansmition')
+        console.log('errooore f Tansmition');
       }
     );
 
+  }
+  findByTransmitionLibelle(transmition: Transmition) {
+    this.http.get<Array<Voiture>>('http://localhost:9090/agencelocation/voiture/Trans/libelle/' + transmition.libelle ).subscribe(
+      data => {
+        this.transmition.voiture = data;
+        console.log('passe bien');
+      },
+      error => {
+        console.log('erreur');
+      }
+    );
   }
 
   findByLibelle() {
@@ -40,11 +60,23 @@ export class TransmitionService {
       }
     );
   }
+  deleteTransmition(transmition: Transmition) {
+    this.http.delete<number>('http://localhost:9090/AgenceLocation/transmition/libelle/' + transmition.libelle ).subscribe(
+      data => {
+        if (data > 0 ) {
+          this. deleteFromViwe(transmition);
+          console.log(data);
+        }
 
+      }, error => {
+          console.log(error);
+      }
+    )
+  }
 
 
   get transmition(): Transmition {
-    if(this._transmition == null){
+    if (this._transmition == null) {
       this._transmition = new Transmition();
     }
     return this._transmition;
@@ -55,7 +87,7 @@ export class TransmitionService {
   }
 
   get transmitions(): Array<Transmition> {
-    if(this._transmitions == null){
+    if (this._transmitions == null) {
       this._transmitions = new Array<Transmition>();
     }
     return this._transmitions;
@@ -69,6 +101,12 @@ export class TransmitionService {
     const myCopie = new Transmition();
     myCopie.libelle = transmition.libelle;
     return myCopie;
+  }
+  private deleteFromViwe(transmition: Transmition) {
+    const index = this.transmitions.findIndex(c => c.libelle === transmition.libelle );
+    if (index !== -1) {
+      this.transmitions.splice(index, 1);
+    }
   }
 
 

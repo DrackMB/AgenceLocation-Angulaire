@@ -8,15 +8,27 @@
         <input type="text" class="form-control" [(ngModel)]="transmition.libelle">
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12 ">
-    <label >Transmition</label> <select name="Transmiton"  class="form-control" >
-    <option  *ngFor="let c of transmitions" >{{c.libelle}}</option>
-  </select>
-      </div>
-    </div>
+
     <div class="card-footer">
     <button class=" btn btn-block  btn-outline-dark" (click)="save()">Ajouter</button>
 
   </div>
+  </div>
+
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>libelle</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let c of transmitions">
+      <td>{{c.libelle}}</td>
+      <td><button class="btn btn-danger btn-sm fa fa-plus " (click)="findByTransmitionLibelle(c)"></button></td>
+      <td><button class="btn btn-danger btn-sm fa fa-trash" (click)="deleteTransmition(c)" ></button></td>
+    </tr>
+    </tbody>
+  </table>
 
