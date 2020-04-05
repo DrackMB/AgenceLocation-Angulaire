@@ -17,6 +17,13 @@ import {MarqueComponent} from './agence-locations/marque/marque.component';
 import { NoteComponent } from './agence-locations/note/note.component';
 import { ClientComponent } from './agence-locations/client/client.component';
 import { ReviewComponent } from './agence-locations/review/review.component';
+import { PaysComponent } from './agence-locations/pays/pays.component';
+import { VilleComponent } from './agence-locations/ville/ville.component';
+import { EtatLieuComponent} from './agence-locations/etat-lieu/etat-lieu.component';
+import { EtatLieuItemsComponent} from './agence-locations/etat-lieu-items/etat-lieu-items.component';
+import { ConsigneComponent } from './agence-locations/consigne/consigne.component';
+
+
 
 const appRoutes: Routes = [
   {path: 'Carburant' , component: CarburantComponent},
@@ -28,7 +35,12 @@ const appRoutes: Routes = [
   {path: 'Voiture' , component: VoitureComponent},
   {path: 'Client' , component: ClientComponent},
   {path: 'Note' , component: NoteComponent },
-  {path: 'Review' , component: ReviewComponent}
+  {path: 'Review' , component: ReviewComponent},
+  {path: 'Ville' , component: VilleComponent},
+  {path: 'Pays' , component: PaysComponent},
+  {path: 'Consigne' , component: ConsigneComponent},
+  {path: 'EtatLieu' , component: EtatLieuComponent},
+  {path: 'EtatLieuItems' , component: EtatLieuItemsComponent}
 ]
 @NgModule({
   declarations: [
@@ -44,7 +56,12 @@ const appRoutes: Routes = [
     MarqueComponent,
     NoteComponent,
     ClientComponent,
-    ReviewComponent
+    ReviewComponent,
+    PaysComponent,
+    VilleComponent,
+    EtatLieuComponent,
+    EtatLieuItemsComponent,
+    ConsigneComponent
   ],
     imports: [
         BrowserModule,
