@@ -1,0 +1,56 @@
+
+<div class="card col-md-6 m-3" >
+  <div class="card-header">Ajouter une pays</div>
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col-md-12">
+        <label>Nom</label>
+        <input type="text" [(ngModel)]="pays.nom" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>Code</label>
+        <input type="text" [(ngModel)]="pays.code" class="form-control">
+      </div>
+    </div>
+
+  </div>
+  <div class="card-footer">
+    <button class=" btn btn-block  btn-outline-dark" (click)="save(pays)" [disabled]="!validateSave()">save</button>
+    <button class="btn btn-block btn-outline-dark"(click)="deleteByNom(pays)">delete</button>
+  </div>
+
+
+
+  <div>
+    <label>Listes des pays</label>
+    <select name="pays" class="col-md-12 "  (click)="findAll()" >
+      <option  *ngFor="let f of paysListe">{{f.nom}}</option>
+    </select>
+  </div>
+
+</div>
+
+<table class="table table-striped">
+  <thead>
+  <div><p>listes des pays par nom</p></div>
+  <div class="form-group">
+
+    <label>nom</label>
+    <input type="text" class="form-control" [(ngModel)]="paysByNom.nom">
+    <button class="btn btn-danger btn-sm fa fa-plus " (click)="findByNom(paysByNom)">chercher par nom</button>
+    <button class="btn btn-danger btn-sm fa fa-plus " (click)="deleteByNom(paysByNom)">supprimer par nom</button>
+
+  </div>
+  </thead>
+  <tbody>
+    <td>{{paysByNom.code}}</td>
+    <td>{{paysByNom.ville}}</td>
+
+  </tbody>
+</table>
+
+
+
