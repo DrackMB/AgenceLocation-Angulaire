@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Agence} from '../model/agence.model';
+import {Ville} from '../model/ville.model';
 
 
 
@@ -22,6 +23,8 @@ export class AgenceService {
   private _agencesByVille: Array<Agence>;
 
   private _agenceByCode: Agence;
+
+  private _ville: Ville;
 
   private url = 'http://localhost:9090/agenceLocation/agence/'
 
@@ -84,12 +87,24 @@ export class AgenceService {
     this._agencesByVille = value;
   }
 
+
+  get ville(): Ville {
+    if (this._ville == null) {
+      this._ville =  new Ville();
+    }
+    return this._ville;
+  }
+
+  set ville(value: Ville) {
+    this._ville = value;
+  }
+
   public save(agence: Agence) {
     this.http.post<number>('http://localhost:9090/agenceLocation/agence/', agence).subscribe(
       data => {
         if ( data > 0) {
-        this.agences.push(this.cloneAgence(agence));
-      //  this.ville.agence(this.cloneAgence(this.agence));
+        this.agences.push(this.cloneAgence(this.agence));
+        this.ville.agence.push(this.cloneAgence(this.agence));
         console.log(data);
         this.agence = null;
         }
@@ -99,7 +114,7 @@ export class AgenceService {
     );
   }
   public validateSave(): boolean {
-    return this.agence.code != null && this.agence.nom.length > 0;
+    return this.agence.code != null ;
 
   }
 
@@ -171,6 +186,7 @@ public  deleteByNomFromView(agence: Agence) {
       data => {
         console.log(data);
         this.deleteByCodeFromView(agence);
+        this.agence = null;
       }, error => {
         console.log('erreur');
       }
