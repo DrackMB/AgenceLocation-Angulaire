@@ -48,8 +48,8 @@
   <tbody>
   <tr *ngFor="let r of reviews ">
     <td>{{r.corps}}</td>
-    <td>{{r.voiture.categorie}}</td>
-    <td>{{r.note}}</td>
+    <td>{{r.voiture.categorie.libelle}}</td>
+    <td>{{r.note.libelle}}</td>
     <td>{{r.client.nom}}</td>
     <td>
       <button class=" btn btn-block  btn-outline-dark" (click)="delete()">delete</button>

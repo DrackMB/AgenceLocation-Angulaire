@@ -1,26 +1,181 @@
-<div class="card col-md-6 m-3">
-       <label>listes de agences </label>
- <select name="agence" class="col-md-auto"  (click)="findall()" >
-  <option  *ngFor="let f of agences">{{f.nom}}</option>
-</select>
-  </div>
 
 <table class="table table-striped">
   <thead>
+  <div><p>listes des agences</p></div>
+
   <tr>
-    <th>nom agence</th>
-    <th>code </th>
-    <th>Action</th>
+    <th>Nom d'agence</th>
+    <th>L'adresse </th>
+    <th>Num</th>
+    <th>Code</th>
+    <th>ville</th>
+
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let c of agences">
-    <td>{{c.nom}}</td>
-    <td>{{c.code}}</td>
-    <td><button class="btn btn-danger btn-sm fa fa-plus " (click)="findByCode(c)"></button></td>
+  <tr *ngFor="let a of this.agences">
+    <td>{{a.nom}}</td>
+    <td>{{a.adress}}</td>
+    <td>{{a.numTele}}</td>
+    <td>{{a.code}}</td>
+    <th>{{a.ville.nom}}</th>
+
+
+  </tr>
+  </tbody>
+
+</table>
+
+
+
+
+
+<table class="table table-striped">
+  <thead>
+  <div><p>listes des agences par mon</p></div>
+  <div class="form-group">
+
+    <label>nom</label>
+    <input type="text" class="form-control" [(ngModel)]="agence.nom">
+    <button class="btn btn-danger btn-sm fa fa-plus " (click)="findByNom(agence)">chercher par nom</button>
+    <button class="btn btn-danger btn-sm fa fa-plus " (click)="deleteByNom(agence)">supprimer par nom</button>
+
+  </div>
+
+
+  <tr>
+    <th>Nom d'agence</th>
+    <th>Num</th>
+    <th>Code</th>
+    <th>L'adresse </th>
+    <th>Ville</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let ag of agencesByNom ">
+    <td>{{ag.nom}}</td>
+    <td>{{ag.numTele}}</td>
+    <td>{{ag.code}}</td>
+    <td>{{ag.adress}}</td>
+    <td>{{ag.ville.nom}}</td>
+
   </tr>
   </tbody>
 </table>
 
 
+<table class="table table-striped">
+  <thead>
+  <div><p>listes des agences par ville</p></div>
+  <div class="form-group">
+
+    <label>ville</label>
+    <input type="text" class="form-control" [(ngModel)]="agence.ville">
+    <button class="btn btn-danger btn-sm fa fa-plus " (click)="findByVille(agence)">chercher par ville</button>
+  </div>
+
+
+  <tr>
+    <th>Nom d'agence</th>
+    <th>Num</th>
+    <th>Code</th>
+    <th>L'adresse </th>
+    <th>Ville</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let ag of agencesByVille ">
+    <td>{{ag.nom}}</td>
+    <td>{{ag.numTele}}</td>
+    <td>{{ag.code}}</td>
+    <td>{{ag.adress}}</td>
+    <td>{{ag.ville.nom}}</td>
+  </tr>
+  </tbody>
+</table>
+
+
+  <table class="table table-striped">
+   <div class="card-header">supprimer tous une agence </div>
+    <thead>
+    <tr>
+      <th>code</th>
+      <th>supprimer</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let a of agences">
+      <td>{{a.code}}</td>
+      <td><button class="btn btn-danger btn-sm fa fa-trash-o " (click)="deleteByCode(a)">Supprimer par code</button></td>
+
+    </tr>
+    </tbody>
+  </table>
+
+
+<div class="card col-md-6 m-3" >
+<div class="card-header">find by code</div>
+<div class="card-body">
+  <div class="row">
+    <div class="col-md-12">
+      <label>code</label>
+      <input type="text" class="form-control" [(ngModel)]="agence.code">
+    </div>
+  </div>
+</div>
+<div class="card-footer">
+  <button class="btn btn-danger btn-sm fa fa-plus " (click)="findByCode(agence)">chercher par code</button>
+</div>
+</div>
+<div>
+  {{agenceByCode.nom}}
+
+</div>
+
+<div class="card col-md-6 m-3">
+  <div class="card-header">Ajouter une agence</div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <label>Nom</label>
+        <input type="text" [(ngModel)]="agence.nom" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>Numéro de Télephone</label>
+        <input type="number" [(ngModel)]="agence.numTele" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label>Code</label>
+        <input type="text" [(ngModel)]="agence.code" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="col-md-6">
+        <label>Adresse</label>
+        <input type="text" [(ngModel)]="agence.adress" class="form-control">
+      </div>
+      <div class="col-md-6">
+        <label>Ville</label>
+        <select name="ville" [(ngModel)]="agence.ville" class="form-control">
+          <option  *ngFor="let v of villes" [ngValue]="v" >{{v.nom}}</option>
+        </select>
+
+      </div>
+
+
+
+    </div>
+    <div class="card-footer">
+        <button class=" btn btn-block  btn-outline-dark" (click)="save(agence)" [disabled]="!validatSave()">save</button>
+        <button class=" btn btn-block  btn-outline-dark" >update</button>
+
+    </div>
+  </div>
+</div>
 

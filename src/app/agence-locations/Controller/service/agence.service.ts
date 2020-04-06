@@ -1,30 +1,46 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Agence} from '../model/agence.model';
-import {Voiture} from '../model/voiture.model';
+
+
+
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AgenceService {
 
+
   private _agence: Agence;
 
   private _agences: Array<Agence>;
 
-  public findall() {
-    this.http.get<Array<Agence>>('http://localhost:9090/AgenceLocation/agence/').subscribe(
-      data => {
-        this._agences = data;
-        console.log('les données');
-      },
-      error => {
-        console.log('erreur quelque part');
-      }
-    );
+  private _agencesByNom: Array<Agence>;
+
+  private _agencesByVille: Array<Agence>;
+
+  private _agenceByCode: Agence;
+
+  private url = 'http://localhost:9090/agenceLocation/agence/'
+
+  constructor(private http: HttpClient) {
   }
 
-  get agence(): Agence {
+
+  get agenceByCode(): Agence {
+    if (this._agenceByCode == null){
+      this._agenceByCode = new Agence();
+    }
+    return this._agenceByCode;
+  }
+
+  set agenceByCode(value: Agence) {
+    this._agenceByCode = value;
+  }
+
+  get  agence(): Agence {
     if (this._agence == null) {
       this._agence = new Agence();
     }
@@ -46,29 +62,143 @@ export class AgenceService {
     this._agences = value;
   }
 
-  public findByCode(agence: Agence) {
-    this.http.get<Array<Voiture>>('http://localhost:9090/agencelocation/voiture/code/' + agence.code).subscribe(
+  get agencesByNom(): Array<Agence> {
+    if (this._agencesByNom == null) {
+      this._agencesByNom = new Array<Agence>();
+    }
+    return this._agencesByNom;
+  }
+
+  set agencesByNom(value: Array<Agence>) {
+    this._agencesByNom = value;
+  }
+
+  get agencesByVille(): Array<Agence> {
+    if (this._agencesByVille == null) {
+      this._agencesByVille = new Array<Agence>();
+    }
+    return this._agencesByVille;
+  }
+
+  set agencesByVille(value: Array<Agence>) {
+    this._agencesByVille = value;
+  }
+
+  public save(agence: Agence) {
+    this.http.post<number>('http://localhost:9090/agenceLocation/agence/', agence).subscribe(
       data => {
-        this.agence.voiture = data;
-        console.log('passe bien');
-      },
-      error => {
+        if ( data > 0) {
+        this.agences.push(this.cloneAgence(agence));
+      //  this.ville.agence(this.cloneAgence(this.agence));
+        console.log(data);
+        this.agence = null;
+        }
+      }, error => {
+        console.log('erreur');
+      }
+    );
+  }
+  public validateSave(): boolean {
+    return this.agence.code != null && this.agence.nom.length > 0;
+
+  }
+
+  public  findAll() {
+    this.http.get<Array<Agence>>( 'http://localhost:9090/agenceLocation/agence/').subscribe(
+      data => {
+        this.agences = data;
+        console.log(data);
+      }, error => {
+        console.log('erreur');
+      }
+    );
+  }
+  public findByVille(agence: Agence ) {
+    this.http.get<Array<Agence>>('http://localhost:9090/agenceLocation/agence/ville/nom/' + agence.ville).subscribe(
+      data => {
+        if (data != null) {
+          this.agencesByVille = data ;
+          console.log('data ' + data );
+          this.agence = null ;
+        }
+      }, error => {
+        console.log('error');
+      }
+    );
+  }
+
+  public findByNom(agence: Agence ) {
+    this.http.get<Array<Agence>>('http://localhost:9090/agenceLocation/agence/nom/' + agence.nom).subscribe(
+      data => {
+        if (data != null) {
+          this.agencesByNom = data ;
+          console.log('data ' + data );
+          this.agence = null ;
+        }
+      }, error => {
+        console.log('error');
+      }
+    );
+  }
+
+
+public  deleteByNomFromView(agence: Agence) {
+    const index = this.agencesByNom.findIndex(a => a.nom === agence.nom);
+    if (index !== -1) {
+      this.agencesByNom.splice(index, 1 );
+    }
+  }
+  public  deleteByCodeFromView(agence: Agence) {
+    const index = this.agences.findIndex(a => a.code === agence.code);
+    if (index !== -1) {
+      this.agences.splice(index, 1 );
+    }
+  }
+
+  public  deleteByNom(agence: Agence) {
+    this.http.delete<number>('http://localhost:9090/agenceLocation/agence/nom/' + agence.nom).subscribe(
+      data => {
+        console.log(data);
+        this.deleteByNomFromView(agence);
+      }, error => {
         console.log('erreur');
       }
     );
   }
 
-  public findByNom(agence: Agence) {
-    this.http.get<Array<Voiture>>('http://localhost:9090/AgenceLocation/agence/nom/' + agence.nom).subscribe(
+  public  deleteByCode(agence: Agence) {
+    this.http.delete<number>('http://localhost:9090/agenceLocation/agence/code/' + agence.code).subscribe(
       data => {
-        this.agence.voiture = data;
-        console.log('passe bien');
-      },
-      error => {
+        console.log(data);
+        this.deleteByCodeFromView(agence);
+      }, error => {
         console.log('erreur');
       }
     );
   }
+  public findByCode(agence: Agence ) {
+    this.http.get<Agence>('http://localhost:9090/agenceLocation/agence/code/' + agence.code).subscribe(
+      data => {
+        if (data != null) {
+          this.agenceByCode = data;
+          console.log('data ' + data.code );
+          agence = null ;
+        }
+      }, error => {
+        console.log('error');
+      }
+    );
+  }
 
-  constructor(private http: HttpClient) { }
-}
+  private cloneAgence(agence: Agence) {
+    const myClon = new Agence();
+    myClon.nom = agence.nom;
+    myClon.numTele = agence.numTele;
+    myClon.code = agence.code;
+    myClon.adress = agence.adress;
+    myClon.ville = agence.ville;
+    return myClon;
+  }
+
+
+  }

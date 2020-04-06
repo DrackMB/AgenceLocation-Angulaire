@@ -23,7 +23,7 @@ export class VoitureComponent implements OnInit {
   ngOnInit(): void {
 
     this.voitureService.findall();
-    this.agenceService.findall();
+    this.agenceService.findAll();
     this.transmitionService.findAll();
     this.carburantService.findAll();
     this.transmitionService.findAll();

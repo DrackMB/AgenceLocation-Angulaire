@@ -41,10 +41,12 @@ export class ReviewComponent implements OnInit {
   get reviews(): Array<Review> {
     return this.reviewService.reviews;
   }
+
    public delete() {
     return this.reviewService.deleteReview();
    }
     ngOnInit(): void {
-      this.reviewService.findAll();
+      return this.reviewService.findAll();
   }
+
 }
