@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-header">
+
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <label>prenom</label>
+      <input type="text" class="form-control" [(ngModel)]="administrateur.prenom">
+    </div>
+    <div class="form-group">
+      <label>nom</label>
+      <input type="text" class="form-control" [(ngModel)]="administrateur.nom">
+    </div>
+    <div class="form-group">
+      <label>login</label>
+      <input type="text" class="form-control" [(ngModel)]="administrateur.login">
+    </div>
+    <div class="form-group">
+      <label>password</label>
+      <input type="text" class="form-control" [(ngModel)]="administrateur.password">
+    </div>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-outline-dark btn-block" (click)="save()">save
+    </button>
+  </div>
+</div>
+

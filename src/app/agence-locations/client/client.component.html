@@ -57,7 +57,7 @@
       <td>{{c.sexe}}</td>
       <td>{{c.adress}}</td>
       <td>
-        <button class=" btn btn-block  btn-outline-dark" (click)="deletecin(c.cin)">delete</button>
+        <button class=" btn btn-block  btn-outline-dark" (click)="deletecin(c)">delete</button>
       </td>
     </tr>
     </tbody>
@@ -69,7 +69,7 @@
     <div class="form-group">
 
       <label>cin</label>
-      <input type="text" class="form-control" [(ngModel)]="client.cin">
+      <input type="text" class="form-control" [(ngModel)]="client1.cin">
     </div>
     <table class="table table-striped col-md-6 m-3 ">
       <thead>
@@ -83,17 +83,17 @@
       </thead>
       <tbody>
       <tr>
-        <td>{{client.cin}}</td>
-        <td>{{client.nom}}</td>
-        <td>{{client.prenom}}</td>
-        <td>{{client.sexe}}</td>
-        <td>{{client.adress}}</td>
+        <td>{{client1.cin}}</td>
+        <td>{{client1.nom}}</td>
+        <td>{{client1.prenom}}</td>
+        <td>{{client1.sexe}}</td>
+        <td>{{client1.adress}}</td>
       </tr>
       </tbody>
     </table>
   </div>
   <div class="card-footer">
-    <button class="btn btn-outline-dark btn-block" (click)="findcin(client.cin)">trouver</button>
+    <button class="btn btn-outline-dark btn-block" (click)="findcin(client1)">trouver</button>
 
   </div>
 

@@ -9,6 +9,7 @@ import {Agence} from '../model/agence.model';
 export class ClientService {
    private _client: Client;
    private _clients: Array <Client>;
+   private _client1: Client;
   constructor(private http: HttpClient) {}
 
 public save() {
@@ -23,24 +24,25 @@ public save() {
     );
 }
 public findAll() {
-    this.http.get<Array<Client>>('http://localhost:9090/AgenceLocation/client/').subscribe(
+    this.http.get<Array<Client>>('http://localhost:9090/AgenceLocation/client/findAll/').subscribe(
       data => {
-        this._clients = data;
+        this.clients = data;
       }, error => {
         console.log('chi7aja fl find');
       }
     );
 }
-  public  findByCin() {
-    this.http.get<Client>('http://localhost:9090/AgenceLocation/client/cin/' + this.client.cin).subscribe(
+  public  findByCin(client1: Client) {
+    this.http.get<Client>('http://localhost:9090/AgenceLocation/client/cin/' + this.client1.cin).subscribe(
       data => {
-          console.log(data);
+        this.client1 = data;
+        console.log(data);
       }, error => {
        console.log('kayen erore');
       }
     );
   }
-  public  deleteByCin() {
+  public  deleteByCin(client: Client) {
     this.http.delete('http://localhost:9090/AgenceLocation/client/cin/' + this.client.cin).subscribe(
       data => {
         console.log(data);
@@ -60,6 +62,19 @@ public findAll() {
 
   set client(value: Client) {
     this._client = value;
+  }
+
+
+  get client1(): Client {
+    if(this._client1 == null){
+      this._client1 = new Client()
+      ;
+    }
+    return this._client1;
+  }
+
+  set client1(value: Client) {
+    this._client1 = value;
   }
 
   get clients(): Array<Client> {

@@ -23,10 +23,12 @@ export class NoteComponent implements OnInit {
   get notes(): Array<Note> {
     return this.noteService.notes;
   }
-  get notesall(): Array<Note> {
-    return this.noteService.notesall;
+  get note1(): Note {
+    return  this.note1;
   }
-
+  public findbylibelle(note: Note ) {
+    return this.noteService.findByLibelle(this.note1);
+  }
 
     ngOnInit(): void {
     this.noteService.findAll();

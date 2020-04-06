@@ -23,13 +23,19 @@ export class ClientComponent implements OnInit {
   public findall() {
     return this.clientService.findAll();
   }
-  public deletecin(cin: string) {
-    return this.clientService.deleteByCin();
+  public deletecin(client: Client) {
+    return this.clientService.deleteByCin(this.client);
   }
-  public findcin(cin: string) {
-    return this.clientService.findByCin();
+  public findcin(client: Client) {
+    return this.clientService.findByCin(this.client1);
   }
+  get client1(): Client {
+    return this.clientService.client1;
+  }
+
+
     ngOnInit(): void {
+    this.clientService.findAll();
   }
 
 }
