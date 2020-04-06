@@ -1,4 +1,4 @@
-<div class="card col-md-4 m-3" >
+<div class="card col-md-6 m-3" >
   <div class="card-header">Ajouter un etat Lieu</div>
   <div class="card-body">
 
@@ -15,22 +15,22 @@
         <input type="date" [(ngModel)]="etatLieu.dateEtatLieu" class="form-control">
       </div>
     </div>
-
     <div class="row">
-      <div class="col-md-12">
-        <label>consigne</label>
-        <select name="consigne" [(ngModel)]="etatLieu.consigne" class="form-control">
-          <option  *ngFor="let v of consignes" [ngValue]="v" >{{v.libelle}}</option>
+      <div class="col-md-6">
+        <label>voiture</label>
+        <select name="locationDetail" [(ngModel)]="etatLieu.locationDetail" class="form-control">
+          <option  *ngFor="let v of voitureResult" [ngValue]="v" >{{v.matricule}}</option>
         </select>
       </div>
+      <div class="col-md-6">
+        <label>prix</label>
+        <input type="locationDetail" [(ngModel)]="etatLieu.locationDetail" class="form-control">
+      </div>
     </div>
-
     <div class="row">
       <div class="col-md-12">
-        <label>EtatLieuItems</label>
-        <select name="etatLieuItems" [(ngModel)]="etatLieu.etatLieuItems" class="form-control">
-          <option  *ngFor="let et of etatLieuItemsListe" [ngValue]="et" >{{et.gravite}}</option>
-        </select>
+        <label>description</label>
+        <input type="text" [(ngModel)]="etatLieu.description" class="form-control">
       </div>
     </div>
 
@@ -39,14 +39,16 @@
     <button class="btn btn-block btn-outline-dark"(click)="deleteByReference(etatLieu)">delete</button>
   </div>
 
-  <div>
-    <label>Listes des agences</label>
-    <select name="etatLieu" class="col-md-12 "  (click)="findAll()" >
-      <option  *ngFor="let f of etatLieus">{{f.reference}}</option>
-    </select>
+    <div>
+      <label>Listes des etat Lieu</label>
+      <select name="etatLieu" class="col-md-12 "  (click)="findAll()" >
+        <option  *ngFor="let f of etatLieus">{{f.reference}}</option>
+      </select>
+    </div>
   </div>
-
 </div>
+
+
 
 <table class="table table-striped">
   <thead>
@@ -55,60 +57,178 @@
     <th>dateEtatLieu</th>
     <th>locationDetail</th>
     <th>description </th>
-
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let ag of etatLieusByDateEtatLieu ">
     <td>{{ag.reference}}</td>
     <td>{{ag.dateEtatLieu}}</td>
-    <td> </td>
+    <td>{{ag.locationDetail.voiture.matricule}} </td>
     <td>{{ag.description}}</td>
-
   </tr>
   </tbody>
 </table>
 
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>reference</th>
+      <th>dateEtatLieu</th>
+      <th>marticule de voiture</th>
+      <th>description </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let etm of etatLieusByLocationDetailVoitureMatricule ">
+      <td>{{etm.reference}}</td>
+      <td>{{etm.dateEtatLieu}}</td>
+      <td>{{etm.locationDetail.voiture.matricule}} </td>
+      <td>{{etm.description}}</td>
+    </tr>
+    </tbody>
+  </table>
 
 
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>reference</th>
+      <th>dateEtatLieu</th>
+      <th>marticule de voiture</th>
+      <th>description </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let etdr of etatLieusByLocationDetailDateRetour ">
+      <td>{{etdr.reference}}</td>
+      <td>{{etdr.dateEtatLieu}}</td>
+      <td>{{etdr.locationDetail.voiture.matricule}} </td>
+      <td>{{etdr.description}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>reference</th>
+      <th>dateEtatLieu</th>
+      <th>marticule de voiture</th>
+      <th>description </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let etdl of etatLieusByLocationDetailDateLocation ">
+      <td>{{etdl.reference}}</td>
+      <td>{{etdl.dateEtatLieu}}</td>
+      <td>{{etdl.locationDetail.voiture.matricule}} </td>
+      <td>{{etdl.description}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>reference</th>
+      <th>dateEtatLieu</th>
+      <th>marticule de voiture</th>
+      <th>description </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let etdp of etatLieuByLocationDetailprix ">
+      <td>{{etdp.reference}}</td>
+      <td>{{etdp.dateEtatLieu}}</td>
+      <td>{{etdp.locationDetail.voiture.matricule}} </td>
+      <td>{{etdp.description}}</td>
+    </tr>
+    </tbody>
+  </table>
 
 
-
-
-  <div class="card col-md-4 m-3">
+  <div class="card col-md-6 m-3">
     <div class="card-header">
       <div class="row">
-        <label>reference</label>
+        <label>date</label>
       </div>
       <div class="row">
-        <input type="text" class="form-control" [(ngModel)]="etatLieu.reference">
+        <input type="date" class="form-control" [(ngModel)]="etatLieu.dateEtatLieu">
       </div>
 
     <div class="card-body">
-      <button class="btn btn-dark btn-outline-light " (click)="findByDateEtatLieu(etatLieu)">chercher par date</button>
-
-
+      <button class="btn btn-danger btn-sm fa fa-plus " (click)="findByDateEtatLieu(etatLieu)">trouver par date</button>
     </div>
+  </div>
+    <div class="card-header">
+      <div class="row">
+        <label>matricule de voiture</label>
+      </div>
+      <div class="row">
+        <input type="text" class="form-control" [(ngModel)]="locationDetail.voiture.matricule">
+      </div>
+
+      <div class="card-body">
+        <button class="btn btn-danger btn-sm fa fa-plus " (click)="findByLocationDetailVoitureMatricule(locationDetail)">trouver  par voiture</button>
+      </div>
+    </div>
+    <div class="card-header">
+      <div class="row">
+        <label>date Location </label>
+      </div>
+      <div class="row">
+        <input type="date" class="form-control" [(ngModel)]="locationDetail.dateLocation">
+      </div>
+
+      <div class="card-body">
+        <button class="btn btn-danger btn-sm fa fa-plus " (click)="findByLocationDetailDateLocation(locationDetail)">trouver  par date Location</button>
+      </div>
+    </div>
+    <div class="card-header">
+      <div class="row">
+        <label>date retour </label>
+      </div>
+      <div class="row">
+        <input type="date" class="form-control" [(ngModel)]="locationDetail.dateRetour">
+      </div>
+
+      <div class="card-body">
+        <button class="btn btn-danger btn-sm fa fa-plus " (click)="findByLocationDetailDateRetour(locationDetail)">trouver  par date Retoure</button>
+      </div>
+    </div>
+    <div class="card-header">
+      <div class="row">
+        <label>prix</label>
+      </div>
+      <div class="row">
+        <input type="number" class="form-control" [(ngModel)]="locationDetail.prix">
+      </div>
+
+      <div class="card-body">
+        <button class="btn btn-danger btn-sm fa fa-plus " (click)="findByLocationDetailLocationPrix(locationDetail)">trouver  par prix </button>
+      </div>
+    </div>
+
   </div>
 
 
-  div class="card col-md-6 m-3" >
-  <div class="card-header">find by reference</div>
+  <div class="card col-md-6 m-3" >
+  <div class="card-header">find by  reference</div>
   <div class="card-body">
     <div class="row">
       <div class="col-md-12">
         <label>reference</label>
-        <input type="text" class="form-control" [(ngModel)]="etatLieu.dateEtatLieu">
+        <input type="text" class="form-control" [(ngModel)]="etatLieu.reference">
       </div>
     </div>
   </div>
   <div class="card-footer">
     <div class="row">
       <div class="col-md-12">
-        <button class="btn btn-danger btn-sm fa fa-plus " (click)="findByReference(etatLieu)">trouver par reference</button>
+        <button class="btn btn-dark btn-outline-light " (click)="findByReference(etatLieu)">chercher par reference</button>
         <td>{{etatLieuByReference.description}}</td>
         <td>{{etatLieuByReference.dateEtatLieu}}</td>
         <td>{{etatLieuByReference.reference}}</td>
+        <td>{{etatLieuByReference.locationDetail.voiture.matricule}}</td>
       </div>
     </div>
   </div>

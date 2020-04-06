@@ -14,8 +14,20 @@ export class VilleService {
   private _villes: Array<Ville>;
   private _villeByNom: Ville;
   private _pays: Pays;
+  private _paysListe: Array<Pays>;
   private _url = 'http://localhost:9090/agenceLocation/ville/';
 
+
+  get paysListe(): Array<Pays> {
+    if ( this._paysListe == null){
+      this._paysListe = new Array<Pays>();
+    }
+    return this._paysListe;
+  }
+
+  set paysListe(value: Array<Pays>) {
+    this._paysListe = value;
+  }
 
   get ville(): Ville {
     if (this._ville == null) {
@@ -73,7 +85,7 @@ export class VilleService {
     this.http.post<number>(this._url , ville).subscribe(
       data => {
           this.villes.push(this.cloneVille(this.ville));
-          this._pays.ville.push(this.cloneVille(this.ville));
+          this.pays.ville.push(this.cloneVille(this.ville));
           console.log(data);
           this.ville = null;
       }, error => {

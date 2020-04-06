@@ -30,8 +30,8 @@
       <option  *ngFor="let f of consignes">{{f.libelle}}</option>
     </select>
   </div>
-
-  <div class="card col-md-6">
+</div>
+<div class="col-md-6 m-3">
 
     <table class="table table-striped">
       <thead>
@@ -47,6 +47,7 @@
       </tr>
       </tbody>
     </table>
+
 
     <table class="table table-striped">
       <thead>
@@ -65,7 +66,7 @@
     <table class="table table-striped">
       <thead>
       <div class="row">
-        <label>reference d'etat Lieu</label>
+        <label >reference d'etat Lieu</label>
       </div>
       <div class="row">
         <input type="text" class="form-control" [(ngModel)]="consigne.etatLieu">
@@ -75,7 +76,4 @@
       <button class="btn btn-block btn-outline-dark"(click)="findByEtatLieuReference(consigne)">chercher</button>
       </tbody>
     </table>
-
-
-
 </div>

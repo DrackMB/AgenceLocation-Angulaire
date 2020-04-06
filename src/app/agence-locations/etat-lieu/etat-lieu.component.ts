@@ -5,6 +5,12 @@ import {EtatLieuItemsService} from '../Controller/service/etat-lieu-items.servic
 import {ConsigneService} from '../Controller/service/consigne.service';
 import {EtatLieuItems} from '../Controller/model/etat-lieu-items.model';
 import {Consigne} from '../Controller/model/consigne.model';
+import {LocationDetail} from '../Controller/model/location-detail.model';
+import {LocationDetailService} from '../Controller/service/location-detail.service';
+import {ClientService} from '../Controller/service/client.service';
+import {Client} from '../Controller/model/client.model';
+import {VoitureService} from '../Controller/service/voiture-service';
+import {Voiture} from '../Controller/model/voiture.model';
 
 @Component({
   selector: 'app-etat-lieu',
@@ -13,12 +19,28 @@ import {Consigne} from '../Controller/model/consigne.model';
 })
 export class EtatLieuComponent implements OnInit {
 
-  constructor(private etatLieuService: EtatLieuService , private etatLieuItemsService: EtatLieuItemsService , private consigneService: ConsigneService) { }
+  constructor(private etatLieuService: EtatLieuService , private etatLieuItemsService: EtatLieuItemsService , private consigneService: ConsigneService, private locationDetailService: LocationDetailService, private voitureService: VoitureService, private clientService: ClientService) { }
 
   ngOnInit(): void {
     this.etatLieuService.findAll();
     this.etatLieuItemsService.findAll();
     this.consigneService.findAll();
+    this.voitureService.findall();
+  }
+  get voitureResult(): Array<Voiture> {
+    return this.voitureService.voitureResult;
+  }
+ get clients(): Array<Client> {
+    return this.clientService.clients;
+ }
+  get client(): Client {
+    return this.clientService.client;
+  }
+  get locationDetail(): LocationDetail {
+  return this.locationDetailService.locationDetail;
+}
+  get locationDetailResult(): Array<LocationDetail> {
+    return this.locationDetailService.locationDetailResult;
   }
   get etatLieu(): EtatLieu {
     return this.etatLieuService.etatLieu;
@@ -78,8 +100,20 @@ export class EtatLieuComponent implements OnInit {
   public validateSave() {
     return this.etatLieuService.validateSave();
   }
-
-
-
+  public  deleteByLocationDetailVoitureMatricule(locationDetail: LocationDetail) {
+    return this.etatLieuService.etatLieusByLocationDetailVoitureMatricule;
+  }
+  public findByLocationDetailVoitureMatricule(locationDetail: LocationDetail) {
+    return this.etatLieuService.etatLieusByLocationDetailVoitureMatricule;
+  }
+  public findByLocationDetailDateLocation(locationDetail: LocationDetail) {
+    return this.etatLieuService.etatLieusByLocationDetailDateLocation;
+  }
+  public findByLocationDetailDateRetour(locationDetail: LocationDetail) {
+    return this.etatLieuService.etatLieusByLocationDetailDateRetour;
+  }
+  public findByLocationDetailLocationPrix(locationDetail: LocationDetail) {
+    return this.etatLieuService.etatLieusByLocationDetailprix;
+  }
 
 }

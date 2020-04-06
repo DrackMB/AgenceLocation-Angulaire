@@ -5,6 +5,7 @@ import {EtatLieu} from '../Controller/model/etat-lieu.model';
 import {Consigne} from '../Controller/model/consigne.model';
 import {EtatLieuService} from '../Controller/service/etat-lieu.service';
 import {ConsigneService} from '../Controller/service/consigne.service';
+import {VoitureService} from '../Controller/service/voiture-service';
 
 @Component({
   selector: 'app-etat-lieu-items',
@@ -12,6 +13,7 @@ import {ConsigneService} from '../Controller/service/consigne.service';
   styleUrls: ['./etat-lieu-items.component.css']
 })
 export class EtatLieuItemsComponent implements OnInit {
+
   constructor(private etatLieuItemsService: EtatLieuItemsService, private etatLieuService: EtatLieuService, private consigneService: ConsigneService) { }
 
   ngOnInit(): void {

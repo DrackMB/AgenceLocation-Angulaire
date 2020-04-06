@@ -3,8 +3,9 @@ import {Ville} from '../Controller/model/ville.model';
 import {VilleService} from '../Controller/service/ville.service';
 import {AgenceService} from '../Controller/service/agence.service';
 import {Agence} from '../Controller/model/agence.model';
-import {PaysService} from '../Controller/service/pays.service';
+
 import {Pays} from '../Controller/model/pays.model';
+import {PaysService} from '../Controller/service/pays.service';
 
 @Component({
   selector: 'app-ville',
@@ -18,8 +19,11 @@ export class VilleComponent implements OnInit {
   ngOnInit(): void {
     this.villeService.findAll();
     this.agenceService.findAll();
+    this.paysService.findAll();
   }
-
+  get paysListe(): Array<Pays> {
+    return this.paysService.paysListe;
+  }
   get pays(): Pays {
     return this.villeService.pays;
   }

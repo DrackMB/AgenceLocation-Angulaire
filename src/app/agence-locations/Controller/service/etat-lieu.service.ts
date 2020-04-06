@@ -3,6 +3,9 @@ import {EtatLieu} from '../model/etat-lieu.model';
 import {HttpClient} from '@angular/common/http';
 import {Consigne} from '../model/consigne.model';
 import {EtatLieuItems} from '../model/etat-lieu-items.model';
+import {LocationDetail} from '../model/location-detail.model';
+import {Client} from '../model/client.model';
+import {Voiture} from "../model/voiture.model";
 
 
 
@@ -15,8 +18,8 @@ export class EtatLieuService {
 
   private _etatLieu: EtatLieu ;
   private _etatLieus: Array<EtatLieu> ;
-  //private  locationDetails: Array<LocationDetail>;
-  //private _locationDetail: LocationDetail ;
+  private _locationDetail: LocationDetail ;
+  private _locationDetailResult: Array<LocationDetail>;
   private _consigne: Consigne;
   private _consignes: Array<Consigne>;
   private _etatLieuItemsListe: Array<EtatLieuItems>;
@@ -28,11 +31,25 @@ export class EtatLieuService {
   private _etatLieusByLocationDetailDateRetour: Array<EtatLieu>;
   private _etatLieusByLocationDetailprix: Array<EtatLieu>;
   private _etatLieusByLocationDetailClientCin: Array<EtatLieu>;
+  private _client: Client;
+  private _clients: Array<Client>;
+  private _voitureResult: Array<Voiture>;
 
   private _url = 'http://localhost:9090/agenceLocation/etatLieu/' ;
 
 
   constructor(private http: HttpClient) { }
+
+  get voitureResult(): Array<Voiture> {
+    if (this._voitureResult == null) {
+      this._voitureResult = new Array<Voiture>();
+    }
+    return this._voitureResult;
+  }
+
+  set voitureResult(value: Array<Voiture>) {
+    this._voitureResult = value;
+  }
 
   get etatLieu(): EtatLieu {
     if (this._etatLieu == null) {
@@ -45,6 +62,47 @@ export class EtatLieuService {
     this._etatLieu = value;
   }
 
+
+  get client(): Client {
+    if (this._client == null) {
+      this._client = new Client();
+    }
+    return this._client;
+  }
+
+  set client(value: Client) {
+    this._client = value;
+  }
+
+  get clients(): Array<Client> {
+    return this._clients;
+  }
+
+  set clients(value: Array<Client>) {
+    this._clients = value;
+  }
+
+  get locationDetail(): LocationDetail {
+    if (this._locationDetail == null) {
+      this._locationDetail = new LocationDetail();
+    }
+    return this._locationDetail;
+  }
+
+  set locationDetail(value: LocationDetail) {
+    this._locationDetail = value;
+  }
+
+  get locationDetailResult(): Array<LocationDetail> {
+    if (this._locationDetailResult == null){
+      this._locationDetailResult = new Array<LocationDetail>();
+    }
+    return this._locationDetailResult;
+  }
+
+  set locationDetailResult(value: Array<LocationDetail>) {
+    this._locationDetailResult = value;
+  }
 
   get consigne(): Consigne {
     if (this._consigne == null) {
@@ -264,9 +322,9 @@ export class EtatLieuService {
       }
     );
   }
-/*1
+
   public  deleteByLocationDetailVoitureMatricule(locationDetail: LocationDetail) {
-    this.http.delete<number>('http://localhost:9090/agenceLocation/etatLieu/matricule/' + locationDetail.matricule).subscribe(
+    this.http.delete<number>('http://localhost:9090/agenceLocation/etatLieu/matricule/' + locationDetail.voiture.matricule).subscribe(
       data => {
         console.log('deleted data ' + data);
         this.deleteByLocationDetailVoitureMatriculeFromView(locationDetail);
@@ -276,17 +334,17 @@ export class EtatLieuService {
     );
   }
   public  deleteByLocationDetailVoitureMatriculeFromView(locationDetail: LocationDetail) {
-    const index = this.etatLieutsByLocationDetailVoitureMatricule.findIndex(a => a.matricule=== locationDetail.matricule);
+    const index = this.etatLieusByLocationDetailVoitureMatricule.findIndex(a => a.locationDetail.voiture.matricule === locationDetail.voiture.matricule);
     if (index !== -1) {
       this.etatLieusByLocationDetailVoitureMatricule.splice(index, 1 );
     }
   }
-  public findByLocationDetailVoitureMatriculelocationDetail: LocationDetail) {
-  this.http.get<Array<EtatLieu>>('http://localhost:9090/agenceLocation/etatLieu/'+ 'matricule/' + locationDetail.matricule).subscribe(
+  public findByLocationDetailVoitureMatricule(locationDetail: LocationDetail) {
+  this.http.get<Array<EtatLieu>>('http://localhost:9090/agenceLocation/etatLieu/matricule/' + locationDetail.voiture.matricule).subscribe(
     data => {
   if (data != null) {
-  this.tatLieutsByLocationDetailVoitureMatricule = data ;
-  private _console.log('data ' + data );
+  this.etatLieusByLocationDetailVoitureMatricule = data ;
+  console.log('data ' + data );
   this.etatLieu = null ;
 }
 }, error => {
@@ -335,11 +393,12 @@ public findByLocationDetailLocationPrix(locationDetail: LocationDetail) {
     }
   );
 }
+/*
 public findByLocationDetailLocationClientCin(locationDetail: LocationDetail) {
-  this.http.get<Array<EtatLieu>>('http://localhost:9090/agenceLocation/etatLieu/cin/' + locationDetail.cin).subscribe(
+  this.http.get<Array<EtatLieu>>('http://localhost:9090/agenceLocation/etatLieu/cin/' + locationDetail.location.client.cin).subscribe(
     data => {
       if (data != null) {
-        this.etatLieusByLocationDetailCin = data ;
+        this.etatLieusByLocationDetailClientCin = data ;
         console.log('data ' + data );
         this.etatLieu = null ;
       }
@@ -350,7 +409,7 @@ public findByLocationDetailLocationClientCin(locationDetail: LocationDetail) {
 }
 
 public  deleteByLocationDetailLocationClientCin(locationDetail: LocationDetail) {
-  this.http.delete<number>('http://localhost:9090/agenceLocation/etatLieu/matricule/' + locationDetail.matricule).subscribe(
+  this.http.delete<number>('http://localhost:9090/agenceLocation/etatLieu/matricule/' + locationDetail.voiture.matricule).subscribe(
     data => {
       console.log('deleted data ' + data);
       this.deleteByLocationDetailVoitureMatriculeFromView(locationDetail);
@@ -360,11 +419,12 @@ public  deleteByLocationDetailLocationClientCin(locationDetail: LocationDetail) 
   );
 }
 public  deleteByLocationDetailClientCinFromView(locationDetail: LocationDetail) {
-  const index = this.etatLieutsByLocationDetailClientCin.findIndex(a => a.cin=== locationDetail.cin);
+  const index = this.etatLieusByLocationDetailClientCin.findIndex(a => a.locationDetail.location.client.cin === locationDetail.location.client.cin);
   if (index !== -1) {
     this.etatLieusByLocationDetailClientCin.splice(index, 1 );
   }
 }
+
 */
 
 }

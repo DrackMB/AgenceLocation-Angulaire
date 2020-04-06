@@ -12,18 +12,19 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
         <label>Nom</label>
         <input type="text" class="form-control" [(ngModel)]="ville.nom">
       </div>
 
   </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
         <label>Pays</label>
-        <input type="text" class="form-control" [(ngModel)]="ville.pays">
+        <select name="pays" [(ngModel)]="ville.pays" class="form-control">
+          <option  *ngFor="let p of paysListe" [ngValue]="p" >{{p.nom}}</option>
+        </select>
       </div>
-
     </div>
   <div class="card-footer">
     <button class=" btn btn-block  btn-outline-dark" (click)="save(ville)"  [disabled]="!validateSave()" >Ajouter</button>
@@ -40,24 +41,26 @@
 
 <label>listes des agences</label>
 <select name="agence" class="col-md-12"  (click)="findAll()" >
-  <option  *ngFor="let a of villes">{{a.agence}}</option>
+  <option  *ngFor="let a of agences">{{a.nom}}</option>
 </select>
 </div>
 
 <table class="table table-striped">
   <thead>
   <div><p>listes des ville par nom</p></div>
-  <div class="form-group">
-
+  <div class="row">
     <label>nom</label>
+  </div>
+  <div class="row">
     <input type="text" class="form-control" [(ngModel)]="villeByNom.nom">
     <button class="btn btn-danger btn-sm fa fa-plus " (click)="findByNom(villeByNom)">chercher par nom</button>
     <button class="btn btn-danger btn-sm fa fa-plus " (click)="deleteByNom(villeByNom)">supprimer par nom</button>
-
   </div>
   </thead>
   <tbody>
-  {{villeByNom.nom}}</tbody>
+  <th>{{villeByNom.code}}</th>
+  <th>{{villeByNom.pays}}</th>
+  </tbody>
 </table>
 
 
