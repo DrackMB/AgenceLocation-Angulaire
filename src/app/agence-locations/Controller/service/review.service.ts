@@ -41,7 +41,7 @@ export class ReviewService {
     this.http.get<Array <Review>> ('http://localhost:9090/agencelocation/review/').subscribe(
       data => {
         console.log( data);
-        this._reviews = data;
+        this.reviews = data;
       }, error => {
         console.log('error');
 
